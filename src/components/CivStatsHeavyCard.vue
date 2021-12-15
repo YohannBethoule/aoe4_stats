@@ -5,6 +5,7 @@
         elevation="15"
     >
           <v-card-title>
+
             <span class="text-h6">{{civ.string}}</span>
           </v-card-title>
           <v-card-text class="flex space-x-16">
