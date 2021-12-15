@@ -42,6 +42,7 @@
           item-value="id"
           label="Select game mode"
           single-line
+          solo
           class="w-1/2"
       ></v-select>
 
