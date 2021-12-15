@@ -4,6 +4,7 @@
         app
         color="primary"
         dark
+        hide-on-scroll
     >
 
       <h1 class="text-xl-h4">AoE IV stats</h1>
