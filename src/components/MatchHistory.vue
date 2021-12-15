@@ -27,10 +27,10 @@
       </template>
 
       <template v-slot:item.rating="{ item }">
-        {{ item.players.find(p => p.profile_id === player.profile_id).rating }}
+        {{ getTeamRating(item , true )}}
       </template>
       <template v-slot:item.opponentRating="{ item }">
-        {{ item.players.find(p => p.profile_id !== player.profile_id).rating }}
+        {{ getTeamRating(item , false )}}
       </template>
 
       <template v-slot:expanded-item="{ headers, item }">
@@ -51,7 +51,10 @@
 
             <div class="flex flex-col">
               <div v-for="ally in item.players.filter(p1 => p1.team === item.players.find(p2 => p2.profile_id === player.profile_id).team)" :key="ally.profile_id">
-                <p class="text-xl text-blue-500">{{ ally.name }}</p>
+                <p>
+                  <span class="text-sm text-black-500 mr-3">{{ ally.rating }}</span>
+                  <span class="text-xl text-blue-500">{{ ally.name }}</span>
+                </p>
               </div>
             </div>
             <div class="text-xl align-center my-auto">
@@ -59,7 +62,11 @@
             </div>
             <div class="flex flex-col">
               <div v-for="ennemy in item.players.filter(p1 => p1.team !== item.players.find(p2 => p2.profile_id === player.profile_id).team)" :key="ennemy.profile_id">
-                <p class="text-xl text-red-500">{{ ennemy.name }}</p>
+                <p>
+                  <span class="text-xl text-red-500">{{ ennemy.name }}</span>
+                  <span class="text-sm text-black-500 ml-3">{{ ennemy.rating }}</span>
+                </p>
+
               </div>
             </div>
           </div>
@@ -83,8 +90,8 @@ export default {
       headers: [
         { text: 'Date', value: 'started' },
         { text: 'Mode', value: 'num_slots' },
-        { text: 'Rating', value: 'rating'},
-        { text: 'Opponent rating', value: 'opponentRating' },
+        { text: 'Team Rating', value: 'rating'},
+        { text: 'Opponent Team Rating', value: 'opponentRating' },
         { text: 'Map', value: 'map_type' },
       ],
     }
@@ -93,6 +100,14 @@ export default {
     getMyRating(players) {
       return players.find(p => p.profile_id !== this.player.profile_id).rating;
     },
+    getTeamRating(game, isAllyTeam) {
+      let avg = parseInt(
+          game.players.filter(p1 => ( isAllyTeam === (p1.team === game.players.find(p2 => p2.profile_id === this.player.profile_id).team)))
+              .map(p => p.rating)
+              .avg()
+      )
+      return isNaN(avg) ? '' : avg;
+    }
   }
 }
 </script>
