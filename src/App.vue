@@ -27,6 +27,12 @@ export default {
   },
   beforeMount() {
     Vue.prototype.$leaderboards = [17, 18, 19, 20]
+    Array.prototype.sum = Array.prototype.sum || function (){
+      return this.reduce(function(p,c){return p+c},0);
+    };
+    Array.prototype.avg = Array.prototype.avg || function () {
+      return this.sum()/this.length;
+    };
   }
 }
 </script>
