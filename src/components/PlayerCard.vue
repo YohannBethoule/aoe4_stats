@@ -6,13 +6,19 @@
       loading="playerCharge"
       rounded
   >
-    <v-btn
-        icon
-        color="blue"
-        @click="$emit('close-player-card')"
-    >
-      <v-icon>mdi-close-outline</v-icon>
-    </v-btn>
+    <div class="flex justify-end">
+      <v-hover v-slot="{ hover }">
+        <v-btn
+            icon
+            :color="hover ? 'red' : 'blue'"
+            @click="$emit('close-player-card')"
+        >
+          <v-icon>mdi-close-outline</v-icon>
+        </v-btn>
+      </v-hover>
+
+    </div>
+
 
     <div class="flex flex-col">
       <h1 class="text-3xl">{{player.name}}</h1>

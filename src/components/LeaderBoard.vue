@@ -16,9 +16,6 @@
                 Elo
               </th>
               <th scope="col" class="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal">
-                ID
-              </th>
-              <th scope="col" class="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal">
                 Games
               </th>
               <th scope="col" class="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal">
@@ -37,44 +34,42 @@
             </thead>
             <tbody>
             <tr v-for="[profile_id, player] in leaderboards" :key="player.profile_id" @click="$emit('select-player', profile_id)"
-                class="hover:bg-blue-200">
-              <td class="px-5 py-5 border-b border-gray-200 text-sm">
+                class="hover:bg-blue-200 text-lg">
+              <td class="px-5 py-5 border-b border-gray-200 ">
                 <p class="text-gray-900 whitespace-no-wrap">
                   {{player.name}}
                 </p>
               </td>
-              <td class="px-5 py-5 border-b border-gray-200 text-sm">
+              <td class="px-5 py-5 border-b border-gray-200">
                 <p class="text-gray-900 whitespace-no-wrap">
-                  {{player.rank}}
+                  #{{player.rank}}
                 </p>
               </td>
-              <td class="px-5 py-5 border-b border-gray-200 text-sm">
+              <td class="px-5 py-5 border-b border-gray-200">
                 <p class="text-gray-900 whitespace-no-wrap">
                   {{player.rating}}
                 </p>
               </td>
-              <td class="px-5 py-5 border-b border-gray-200 text-sm">
-                <p class="text-gray-900 whitespace-no-wrap">
-                  {{player.profile_id}}
-                </p>
-              </td>
-              <td class="px-5 py-5 border-b border-gray-200 text-sm">
+              <td class="px-5 py-5 border-b border-gray-200">
                 <p class="text-gray-900 whitespace-no-wrap">
                   {{player.games}}
                 </p>
               </td>
-              <td class="px-5 py-5 border-b border-gray-200 text-sm">
+              <td class="px-5 py-5 border-b border-gray-200">
                 <p class="text-gray-900 whitespace-no-wrap">
                   {{player.wins}}
                 </p>
               </td>
-              <td class="px-5 py-5 border-b border-gray-200 text-sm">
+              <td class="px-5 py-5 border-b border-gray-200">
                 <p class="text-gray-900 whitespace-no-wrap">
                   {{player.losses}}
                 </p>
               </td>
-              <td class="px-5 py-5 border-b border-gray-200 text-sm">
-                <p class="text-gray-900 whitespace-no-wrap">
+              <td class="px-5 py-5 border-b border-gray-200">
+                <p class="whitespace-no-wrap"
+                   :class="{ 'text-green-900' : (player.wins/player.games*100) > 51 ,
+                             'text-orange-900' : (player.wins/player.games*100) < 51 && (player.wins/player.games*100) > 49,
+                             'text-red-900' : (player.wins/player.games*100) < 49}">
                   {{(player.wins/player.games*100).toFixed(2)}} %
                 </p>
               </td>
