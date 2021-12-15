@@ -51,10 +51,7 @@
 
             <div class="flex flex-col">
               <div v-for="ally in item.players.filter(p1 => p1.team === item.players.find(p2 => p2.profile_id === player.profile_id).team)" :key="ally.profile_id">
-                <p>
-                  <span class="text-sm text-black-500 mr-3">{{ ally.rating }}</span>
-                  <span class="text-xl text-blue-500">{{ ally.name }}</span>
-                </p>
+                <MatchHistoryPlayerCard :player="ally" :is-ally="true"></MatchHistoryPlayerCard>
               </div>
             </div>
             <div class="text-xl align-center my-auto">
@@ -62,11 +59,7 @@
             </div>
             <div class="flex flex-col">
               <div v-for="ennemy in item.players.filter(p1 => p1.team !== item.players.find(p2 => p2.profile_id === player.profile_id).team)" :key="ennemy.profile_id">
-                <p>
-                  <span class="text-xl text-red-500">{{ ennemy.name }}</span>
-                  <span class="text-sm text-black-500 ml-3">{{ ennemy.rating }}</span>
-                </p>
-
+                <MatchHistoryPlayerCard :player="ennemy" :is-ally="false"></MatchHistoryPlayerCard>
               </div>
             </div>
           </div>
@@ -77,8 +70,11 @@
 </template>
 
 <script>
+import MatchHistoryPlayerCard from "@/components/MatchHistoryPlayerCard";
+const STRING_UNKNOWN = 'Unknown';
 export default {
   name: "MatchHistory",
+  components: {MatchHistoryPlayerCard},
   props: {
     games: Array,
     player: Object
@@ -102,11 +98,11 @@ export default {
     },
     getTeamRating(game, isAllyTeam) {
       let avg = parseInt(
-          game.players.filter(p1 => ( isAllyTeam === (p1.team === game.players.find(p2 => p2.profile_id === this.player.profile_id).team)))
+          game.players.filter(p1 => ( (isAllyTeam === (p1.team === game.players.find(p2 => p2.profile_id === this.player.profile_id).team) && p1.rating != null)))
               .map(p => p.rating)
               .avg()
       )
-      return isNaN(avg) ? '' : avg;
+      return isNaN(avg) ? STRING_UNKNOWN : avg;
     }
   }
 }
