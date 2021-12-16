@@ -21,9 +21,11 @@
   <LeaderBoard :leaderboards="this.leaderboards"
     v-on:select-player="selectPlayer($event)"></LeaderBoard>
 
-   <PlayerCard v-if="this.selectedPlayer"
-         :selected-player="this.selectedPlayer"
-         v-on:close-player-card="unselectPLayer()"/>
+
+   <PlayerCard
+       v-if="this.selectedPlayer"
+       :selected-player="this.selectedPlayer"
+       v-on:close-player-card="unselectPLayer()"/>
   </div>
 </template>
 
@@ -79,7 +81,6 @@ export default {
     },
     selectPlayer(profile_id) {
       this.selectedPlayer = {...this.leaderboards.get(profile_id)}
-      this.$vuetify.goTo(0)
     },
     unselectPLayer() {
       this.selectedPlayer = null;
@@ -125,8 +126,16 @@ export default {
         this.selectedPlayer = this.leaderboards.get(this.selectedPlayer.profile_id)
       }
     }
+  },
+  watch : {
+    selectedPlayer(value) {
+      if (value) {
+        document.documentElement.classList.add('overflow-y-hidden')
+      } else {
+        document.documentElement.classList.remove('overflow-y-hidden')
+      }
+    }
   }
-
 
 }
 </script>
