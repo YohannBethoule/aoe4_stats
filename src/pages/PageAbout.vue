@@ -9,8 +9,9 @@
     <div class="text-indigo-500 text-lg-h6 mb-5">Check the sources</div>
     <p>
       You can find the source code of the application over there : <a
-        href="https://github.com/YohannBethoule/aoe4_stats">https://github.com/YohannBethoule/aoe4_stats</a><br>
-      This was made using the API from <a href="https://aoeiv.net/#api">aeoiv.net</a>
+        href="https://github.com/YohannBethoule/aoe4_stats"
+        target="_blank">https://github.com/YohannBethoule/aoe4_stats</a><br>
+      This was made using the API from <a href="https://aoeiv.net/#api" target="_blank">aeoiv.net</a>
     </p>
   </div>
 

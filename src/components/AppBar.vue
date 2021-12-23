@@ -34,7 +34,8 @@
         color="#4C0070"
         hide-on-scroll
     >
-      <router-link :to="'/'" class="white--text"><span class="text-h3 text-white-100 text-no-wrap">AoE IV stats</span>
+      <router-link :to="'/'" class="white--text"><span
+          class="text-h3 text-white-100 text-no-wrap">AoE IV Analytics</span>
       </router-link>
       <v-tabs centered class="hidden-sm-and-down">
         <v-tab text to="/">Profile</v-tab>

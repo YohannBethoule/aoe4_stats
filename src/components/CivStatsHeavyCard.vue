@@ -1,27 +1,65 @@
 <template>
   <div>
-    <v-card
-        class="mb-5"
-        elevation="15"
-    >
-          <v-card-title>
+    <span class="font-italic">(Below informations are computed from the match history. The latter being incomplete most of the time, you can note that the total number of games doesn't add up to the total displayed above.)</span>
 
-            <span class="text-h6">{{civ.string}}</span>
-          </v-card-title>
-          <v-card-text class="flex space-x-16">
-            <v-img
-                contain
-                v-if="civ.id >= 0"
-                :src="require(`@/assets/flags/${civ.id}.webp`)" max-height="300" max-width="400"></v-img>
-            <div class="flex flex-col">
-              <p>{{ getGameCount() }} games played</p>
-              <p v-for="leaderboard in constantes.leaderboards" :key="leaderboard.id">
-                {{ leaderboard.label }} - {{ getGameCountByMode(leaderboard.id) }} matches played
-              </p>
-            </div>
-          </v-card-text>
+    <div class="flex items-center justify-center mb-10">
+      <v-btn-toggle
+          v-model="gameMode_id"
+          class="mr-10"
+          mandatory
+      >
+        <v-btn v-for="mode in constantes.leaderboards" :key="mode.id" :value="mode.id" type="button">
+          {{ mode.label }} ({{ getGameCountByMode(mode.id) }})
+        </v-btn>
+      </v-btn-toggle>
+      <v-select
+          v-model="civ_id"
+          :item-text="item => getCivName(item.id) + ' (' + getGameCountByCiv(item.id) + ')'"
+          :items="constantes.civ"
+          class="pt-7"
+          item-value="id"
+          label="Select civilization"
+          solo
+      ></v-select>
+    </div>
 
-    </v-card>
+    <span class="flex my-10 space-x-5">
+      <h4 class="text-h4">{{ getGameCount() }} matches played</h4>
+      <v-chip
+          class="my-auto"
+          dark
+      >
+          {{ gameMode.label }}
+      </v-chip>
+      <v-img
+          v-if="this.civ.id >= 0"
+          :src="require(`@/assets/flags/${this.civ.id}.webp`)"
+          contain max-height="50" max-width="80"></v-img>
+
+    </span>
+
+
+    <!--    <v-card-->
+    <!--        class="mb-5"-->
+    <!--        elevation="15"-->
+    <!--    >-->
+    <!--          <v-card-title>-->
+
+    <!--            <span class="text-h6">{{civ.string}}</span>-->
+    <!--          </v-card-title>-->
+    <!--          <v-card-text class="flex space-x-16">-->
+    <!--            <v-img-->
+    <!--                contain-->
+    <!--                v-if="civ.id >= 0"-->
+    <!--                :src="require(`@/assets/flags/${civ.id}.webp`)" max-height="300" max-width="400"></v-img>-->
+    <!--            <div class="flex flex-col">-->
+    <!--              <p >-->
+    <!--                {{ getModeName(this.gameMode.id) }} - {{ getGameCountByMode(this.gameMode.id) }} matches played-->
+    <!--              </p>-->
+    <!--            </div>-->
+    <!--          </v-card-text>-->
+
+    <!--    </v-card>-->
     <MatchHistory :games="games()" :profile_id="profile_id"></MatchHistory>
   </div>
 </template>
@@ -35,15 +73,20 @@ export default {
   components: {MatchHistory},
   props: {
     profile_id: String,
-    civ: Object,
-    gameMode: Object
   },
   data() {
-    return {}
+    return {
+      gameMode_id: -1,
+      civ_id: -1
+    }
   },
   computed: {
     ...mapGetters({
-      getPlayer: 'players/player'
+      getPlayer: 'players/player',
+      getModeName: 'constantes/gameModeName',
+      getCivName: 'constantes/civName',
+      getCiv: 'constantes/civ',
+      getMode: 'constantes/gameMode'
     }),
     ...mapState({
       constantes: state => state.constantes.all,
@@ -51,6 +94,12 @@ export default {
     }),
     player() {
       return this.getPlayer(this.profile_id)
+    },
+    civ() {
+      return this.getCiv(this.civ_id)
+    },
+    gameMode() {
+      return this.getMode(this.gameMode_id)
     },
     playerLoaded() {
       return this.player && this.player.leaderboards && this.player.gameHistory
@@ -67,9 +116,12 @@ export default {
       return this.games().length
     },
     getGameCountByMode(leaderboard_id) {
-      return this.games().filter(match => {
-        return match.num_slots === this.constantes.leaderboards.find(leaderboard => leaderboard.id === leaderboard_id).nbPlayers
-      }).length
+      return this.player.gameHistory
+          .filter(match => match.num_slots === this.getMode(leaderboard_id)?.nbPlayers || this.getMode(leaderboard_id)?.nbPlayers === 0).length
+    },
+    getGameCountByCiv(civ_id) {
+      return this.player.gameHistory
+          .filter(match => match.players.find(player => player.profile_id == this.profile_id).civ === civ_id || civ_id === -1).length
     }
   },
 }
