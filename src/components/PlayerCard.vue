@@ -93,7 +93,7 @@ export default {
     }
   },
   beforeMount(){
-    this.getPlayer();
+    //this.getPlayer();
   },
   methods: {
     getPlayer(){

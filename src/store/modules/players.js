@@ -13,6 +13,11 @@ const actions = {
             commit('setGameHistory', {profile_id, gameHistory})
         })
     },
+    getRatingHistory({commit}, {leaderboard_id, profile_id}) {
+        api.getRatingHistory(leaderboard_id, profile_id, ratingHistory => {
+            commit('setRatingHistory', {profile_id, leaderboard_id, ratingHistory})
+        })
+    },
     getPlayerLeaderboard({commit}, {leaderboard_id, profile_id}) {
         api.getPlayerLeaderboard(leaderboard_id, profile_id, leaderboard => {
             commit('setPlayerLeaderboard', {profile_id, leaderboard_id, leaderboard})
@@ -20,6 +25,7 @@ const actions = {
     },
     refreshPlayerData({dispatch}, profile_id) {
         dispatch('getGameHistory', profile_id)
+        dispatch('getRatingHistory', {'leaderboard_id': 17, 'profile_id': profile_id})
         store.state.constantes.all.leaderboards.forEach(mode => {
             if (mode.id == -1) return;
             dispatch('getPlayerLeaderboard', {leaderboard_id: mode.id, profile_id: profile_id})
@@ -53,6 +59,13 @@ const mutations = {
             Vue.set(state.all[profile_id], 'gameHistory', gameHistory.data)
         } else {
             Vue.set(state.all, profile_id, {gameHistory: gameHistory.data})
+        }
+    },
+    setRatingHistory(state, {profile_id, ratingHistory}) {
+        if (state.all[profile_id]) {
+            Vue.set(state.all[profile_id], 'ratingHistory', ratingHistory.data)
+        } else {
+            Vue.set(state.all, profile_id, {ratingHistory: ratingHistory.data})
         }
     },
     setPlayerLeaderboard(state, {profile_id, leaderboard_id, leaderboard}) {

@@ -22,7 +22,7 @@
         <v-chip
             dark
         >
-          {{ item.num_slots / 2 }}v{{ item.num_slots / 2 }}
+          {{ gameModeNameFromNumSlots(item.num_slots) }}
         </v-chip>
       </template>
 
@@ -43,6 +43,7 @@
               <v-img
                   :src="require(`@/assets/maps/${item.map_type}.png`)"
                   :alt="'minimap ' + constantes.map_type.find(map => map.id === item.map_type).string"
+                  class="mx-auto"
                   max-height="150"
                   max-width="150"
               ></v-img>
@@ -99,7 +100,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getPlayer: 'players/player'
+      getPlayer: 'players/player',
+      gameModeNameFromNumSlots: 'constantes/gameModeNameFromNumSlots'
     }),
     ...mapState({
       constantes: state => state.constantes.all,

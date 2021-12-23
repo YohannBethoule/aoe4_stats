@@ -25,9 +25,9 @@ export default {
                 callback(response)
             });
     },
-    getRatingHistory(profile_id, leaderboard_id, callback) {
+    getRatingHistory(leaderboard_id, profile_id, callback) {
         axios
-            .get('https://aoeiv.net/api/player/ratinghistory?game=aoe4&leaderboard_id=' + leaderboard_id + '&count=1000&profile_id=' + profile_id)
+            .get('https://aoeiv.net/api/player/ratinghistory?game=aoe4&leaderboard_id=' + leaderboard_id + '&count=10000&profile_id=' + profile_id)
             .then(response => callback(response));
     },
     getConstantes(language, callback) {

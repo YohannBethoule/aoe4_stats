@@ -17,9 +17,25 @@ const actions = {
 
 // getters
 const getters = {
+    gameMode: (state) => (leaderboard_id) => {
+        if (!state.all.leaderboards) return null;
+        return state.all.leaderboards.find(lb => lb.id == leaderboard_id)
+    },
+    civ: (state) => (civ_id) => {
+        if (!state.all.civ) return null;
+        return state.all.civ.find(c => c.id == civ_id)
+    },
     civName: (state) => (civ_id) => {
         if (!state.all.civ) return '';
         return state.all.civ.find(c => c.id == civ_id)?.string
+    },
+    gameModeName: (state) => (leaderboard_id) => {
+        if (!state.all.leaderboards) return '';
+        return state.all.leaderboards.find(lb => lb.id == leaderboard_id)?.label
+    },
+    gameModeNameFromNumSlots: (state) => (num_slots) => {
+        if (!state.all.leaderboards) return '';
+        return state.all.leaderboards.find(lb => lb.nbPlayers == num_slots)?.label
     },
 }
 
