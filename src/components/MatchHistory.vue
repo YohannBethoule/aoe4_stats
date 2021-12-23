@@ -15,7 +15,7 @@
       </template>
 
       <template v-slot:item.map_type="{ item }">
-        {{ $constantes.map_type.find(map => map.id === item.map_type).string }}
+        {{ constantes.map_type.find(map => map.id === item.map_type).string }}
       </template>
 
       <template v-slot:item.num_slots="{ item }">
@@ -42,15 +42,17 @@
             <div class="flex flex-col text-xl">
               <v-img
                   :src="require(`@/assets/maps/${item.map_type}.png`)"
-                  :alt="'minimap ' + $constantes.map_type.find(map => map.id === item.map_type).string"
+                  :alt="'minimap ' + constantes.map_type.find(map => map.id === item.map_type).string"
                   max-height="150"
                   max-width="150"
               ></v-img>
-              <p class="text-center">{{ $constantes.map_type.find(map => map.id === item.map_type).string }}</p>
+              <p class="text-center">{{ constantes.map_type.find(map => map.id === item.map_type).string }}</p>
             </div>
 
             <div class="flex flex-col">
-              <div v-for="ally in item.players.filter(p1 => p1.team === item.players.find(p2 => p2.profile_id === player.profile_id).team)" :key="ally.profile_id">
+              <div
+                  v-for="ally in item.players.filter(p1 => p1.team === item.players.find(p2 => p2.profile_id == profile_id).team)"
+                  :key="ally.profile_id">
                 <MatchHistoryPlayerCard :player="ally" :is-ally="true"></MatchHistoryPlayerCard>
               </div>
             </div>
@@ -58,7 +60,9 @@
               VS
             </div>
             <div class="flex flex-col">
-              <div v-for="ennemy in item.players.filter(p1 => p1.team !== item.players.find(p2 => p2.profile_id === player.profile_id).team)" :key="ennemy.profile_id">
+              <div
+                  v-for="ennemy in item.players.filter(p1 => p1.team !== item.players.find(p2 => p2.profile_id == profile_id).team)"
+                  :key="ennemy.profile_id">
                 <MatchHistoryPlayerCard :player="ennemy" :is-ally="false"></MatchHistoryPlayerCard>
               </div>
             </div>
@@ -71,34 +75,47 @@
 
 <script>
 import MatchHistoryPlayerCard from "@/components/MatchHistoryPlayerCard";
+import {mapGetters, mapState} from "vuex";
+
 const STRING_UNKNOWN = 'Unknown';
 export default {
   name: "MatchHistory",
   components: {MatchHistoryPlayerCard},
   props: {
-    games: Array,
-    player: Object
+    profile_id: String,
+    games: Array
   },
   data() {
     return {
       expanded: [],
-      constantes: this.$constantes,
       headers: [
-        { text: 'Date', value: 'started' },
-        { text: 'Mode', value: 'num_slots' },
-        { text: 'Team Rating', value: 'rating'},
-        { text: 'Opponent Team Rating', value: 'opponentRating' },
-        { text: 'Map', value: 'map_type' },
+        {text: 'Date', value: 'started'},
+        {text: 'Mode', value: 'num_slots'},
+        {text: 'Team Rating', value: 'rating'},
+        {text: 'Opponent Team Rating', value: 'opponentRating'},
+        {text: 'Map', value: 'map_type'},
       ],
     }
   },
+  computed: {
+    ...mapGetters({
+      getPlayer: 'players/player'
+    }),
+    ...mapState({
+      constantes: state => state.constantes.all,
+      leaderboards: state => state.leaderboards,
+    }),
+    player() {
+      return this.getPlayer(this.profile_id)
+    },
+  },
   methods: {
     getMyRating(players) {
-      return players.find(p => p.profile_id !== this.player.profile_id).rating;
+      return players.find(p => p.profile_id != this.profile_id).rating;
     },
     getTeamRating(game, isAllyTeam) {
       let avg = parseInt(
-          game.players.filter(p1 => ( (isAllyTeam === (p1.team === game.players.find(p2 => p2.profile_id === this.player.profile_id).team) && p1.rating != null)))
+          game.players.filter(p1 => ((isAllyTeam === (p1.team === game.players.find(p2 => p2.profile_id == this.profile_id).team) && p1.rating != null)))
               .map(p => p.rating)
               .avg()
       )

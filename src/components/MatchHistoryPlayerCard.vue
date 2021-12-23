@@ -9,12 +9,12 @@
         class="m-5 p-5"
     >
         <span class="text-white">
-          <h1 class="text-lg-h6">
-            {{ player.name }}
-          </h1>
-          <div>
-            Elo : {{ player.rating ? player.rating : 'Unknown'}}
-          </div>
+          <span class="text-lg-h6">
+            <router-link :to="'/profile/'+player.profile_id" class="text-white">{{ player.name }}</router-link>
+          </span>
+          <span>
+            Elo : {{ player.rating ? player.rating : 'Unknown' }}
+          </span>
         </span>
 
 
