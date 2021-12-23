@@ -97,7 +97,6 @@ export default {
   },
   methods: {
     getPlayer(){
-      console.log('getPlayer', this.player )
       this.playerEstCharge = false;
       this.playerCharge = true;
       let requests = [this.getMatchHistory(this.player.profile_id), this.getRatingHistory(this.player.profile_id)]
