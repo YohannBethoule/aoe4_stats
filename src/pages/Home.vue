@@ -1,15 +1,16 @@
 <template>
   <div>
-    <div :class="$vuetify.breakpoint.smAndDown ? 'tw-flex-col tw-justify-center' : 'tw-flex'" class=" gap-x-8">
+    <div :class="$vuetify.breakpoint.smAndDown ? 'tw-flex-col tw-justify-center' : 'tw-flex'" class=" twgap-x-8">
       <v-text-field
-          label="Search..."
+          label="Search player name..."
           v-model="name"
           v-on:keyup.enter="searchId"
           solo
+          light
       ></v-text-field>
       <v-btn
           @click="searchId"
-          class="tw-my-1 tw-mx-5"
+          class="tw-mx-5 tw-mt-1 tw-my-auto"
           outlined
           color="rgba(255, 255, 255, 0.8)"
       >
