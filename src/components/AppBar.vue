@@ -31,7 +31,7 @@
   <div>
     <v-app-bar
         app
-        color="#4C0070"
+        color="rgba(0, 0, 0, 0.4)"
         hide-on-scroll
     >
       <my-link classes="text-h5 text-no-wrap" text="AoE IV Analytics" to="/"></my-link>
