@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :class="$vuetify.breakpoint.smAndDown ? 'flex-col justify-center' : 'flex flew-row'" class=" gap-x-8">
+    <div :class="$vuetify.breakpoint.smAndDown ? 'tw-flex-col tw-justify-center' : 'tw-flex'" class=" gap-x-8">
       <v-text-field
           label="Search..."
           v-model="name"
@@ -9,9 +9,9 @@
       ></v-text-field>
       <v-btn
           @click="searchId"
-          class="ma-2"
+          class="tw-my-1 tw-mx-5"
           outlined
-          color="indigo"
+          color="rgba(255, 255, 255, 0.8)"
       >
         Search
       </v-btn>

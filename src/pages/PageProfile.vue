@@ -3,7 +3,7 @@
     <LoadingPage v-if="!playerLoaded"></LoadingPage>
     <div v-if="playerLoaded">
 
-      <div class="text-md-h3 flex mb-10">
+      <div class="text-md-h3 tw-flex mb-10">
         <span class="mr-5">{{ player.leaderboards['-1'].name }}</span>
         <v-tooltip right>
           <template v-slot:activator="{ on }">
@@ -18,9 +18,9 @@
         <v-skeleton-loader v-if="!playerLoaded" height="50" type="image" width="80"></v-skeleton-loader>
       </div>
 
-      <div class="flex justify-between space-x-5 my-5">
+      <div class="tw-flex tw-justify-between tw-space-x-5 tw-my-5">
         <GameMode v-for="mode in Object.keys(player.leaderboards)" :key="mode" :data="player.leaderboards[mode]"
-                  :label="constantes.leaderboards.find(lb => lb.id == mode).label"/>
+                  :mode="constantes.leaderboards.find(lb => lb.id == mode)"/>
       </div>
 
 

@@ -2,12 +2,14 @@
   <v-app>
     <AppBar></AppBar>
 
-    <v-main v-if="constantes" :style="{background: $vuetify.theme.themes['dark'].mainBackground}">
-      <div class="flex p-md-and-down-10 p-40 items-center place-content-center h-full">
-        <router-view :key="$route.fullPath"></router-view>
+    <v-main :style="{background: $vuetify.theme.themes['dark'].mainBackground}">
+      <div class="tw-flex tw-p-10 md:tw-p-32 tw-items-center tw-place-content-center tw-h-full">
+        <router-view v-if="constantes" :key="$route.fullPath"></router-view>
+        <LoadingPage v-if="!constantes"></LoadingPage>
       </div>
+
     </v-main>
-    <LoadingPage v-if="!constantes"></LoadingPage>
+
   </v-app>
 </template>
 

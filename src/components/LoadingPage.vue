@@ -1,7 +1,7 @@
 <template>
-  <div class="loading flex flex-col h-full mt-10 justify-center align-center">
-    <h2>Loading</h2>
-    <div class="flex mt-2">
+  <div class="loading tw-flex tw-flex-col tw-h-full tw-mt-10 tw-mx-auto tw-justify-center tw-align-center">
+    <h2 class="tw-text-center">Loading</h2>
+    <div class="tw-flex tw-mt-2 tw-mx-auto">
       <span></span>
       <span></span>
       <span></span>
@@ -10,6 +10,7 @@
       <span></span>
       <span></span>
     </div>
+
 
   </div>
 </template>

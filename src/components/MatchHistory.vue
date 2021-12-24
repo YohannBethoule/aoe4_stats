@@ -34,12 +34,12 @@
       </template>
 
       <template v-slot:expanded-item="{ headers, item }">
-        <td :colspan="headers.length" class="text-xl pt-5">
+        <td :colspan="headers.length" class="tw-text-xl pt-5">
           <h3 class="text-xl mb-3">
             {{ new Date(item.started * 1000).toLocaleString() }}
           </h3>
-          <div class="flex space-x-12 items-center place-content-center">
-            <div class="flex flex-col text-xl">
+          <div class="tw-flex tw-space-x-12 tw-items-center tw-place-content-center">
+            <div class="tw-flex tw-flex-col tw-text-xl">
               <v-img
                   :src="require(`@/assets/maps/${item.map_type}.png`)"
                   :alt="'minimap ' + constantes.map_type.find(map => map.id === item.map_type).string"
@@ -50,17 +50,17 @@
               <p class="text-center">{{ constantes.map_type.find(map => map.id === item.map_type).string }}</p>
             </div>
 
-            <div class="flex flex-col">
+            <div class="tw-flex tw-flex-col">
               <div
                   v-for="ally in item.players.filter(p1 => p1.team === item.players.find(p2 => p2.profile_id == profile_id).team)"
                   :key="ally.profile_id">
                 <MatchHistoryPlayerCard :player="ally" :is-ally="true"></MatchHistoryPlayerCard>
               </div>
             </div>
-            <div class="text-xl align-center my-auto">
+            <div class="text-xl tw-align-center tw-my-auto">
               VS
             </div>
-            <div class="flex flex-col">
+            <div class="tw-flex tw-flex-col">
               <div
                   v-for="ennemy in item.players.filter(p1 => p1.team !== item.players.find(p2 => p2.profile_id == profile_id).team)"
                   :key="ennemy.profile_id">
