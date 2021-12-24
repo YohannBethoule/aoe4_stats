@@ -2,7 +2,7 @@
   <div>
     <span class="font-italic">(Below informations are computed from the match history. The latter being incomplete most of the time, you can note that the total number of games doesn't add up to the total displayed above.)</span>
 
-    <div class="flex items-center justify-center mb-10">
+    <div class="tw-flex tw-items-center tw-justify-center tw-mb-10">
       <v-btn-toggle
           v-model="gameMode_id"
           class="mr-10"
@@ -23,7 +23,7 @@
       ></v-select>
     </div>
 
-    <span class="flex my-10 space-x-5">
+    <span class="tw-flex tw-my-10 tw-space-x-5">
       <h4 class="text-h4">{{ getGameCount() }} matches played</h4>
       <v-chip
           class="my-auto"

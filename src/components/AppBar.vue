@@ -34,9 +34,13 @@
         color="#4C0070"
         hide-on-scroll
     >
-      <router-link :to="'/'" class="white--text"><span
-          class="text-h3 text-white-100 text-no-wrap">AoE IV Analytics</span>
-      </router-link>
+      <my-link classes="text-h5 text-no-wrap" text="AoE IV Analytics" to="/"></my-link>
+      <v-hover v-slot="{ hover }">
+        <router-link :class="hover? 'black--text': 'white--text text-decoration-underline'" :to="'/'"><span
+            class="text-h5 text-no-wrap"></span>
+        </router-link>
+      </v-hover>
+
       <v-tabs centered class="hidden-sm-and-down">
         <v-tab text to="/">Profile</v-tab>
         <v-tab text to="/leaderboards">Leaderboard</v-tab>
@@ -79,8 +83,11 @@
 </template>
 
 <script>
+import MyLink from "@/components/MyLink";
+
 export default {
   name: "AppBar",
+  components: {MyLink},
   data() {
     return {
       drawer: false,

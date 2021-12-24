@@ -1,7 +1,11 @@
 module.exports = {
-  content: [],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
+    corePlugins: {
+        preflight: false,
+    },
+    prefix: 'tw-',
+    theme: {
+        extend: {},
+    },
+    variants: {},
+    plugins: [],
 }
