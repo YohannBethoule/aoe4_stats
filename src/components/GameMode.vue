@@ -10,16 +10,9 @@
     <v-card-text class="tw-flex-auto tw-flex-col tw-justify-space-between">
       <p><span v-if="mode.id==-1">Highest </span>Ranking : {{ data.rank }}</p>
       <p><span v-if="mode.id==-1">Highest </span>Elo : {{ Math.round(data.rating) }}</p>
-      <p>Games : <span class="tw-justify-right">{{ data.games }}</span></p>
-      <p>Wins : {{ data.wins }}</p>
-      <p>Losses : {{ data.losses }}</p>
-
-      <p>Winrate : <span
-          :class="{ 'text-green-900' : (data.wins/data.games*100) > 51 ,
-         'text-orange-900' : (data.wins/data.games*100) < 51 && (data.wins/data.games*100) > 49,
-         'text-red-900' : (data.wins/data.games*100) < 49}">
-      {{ (data.wins / data.games * 100).toFixed(2) }} %
-      </span></p>
+      <p>
+        <WinrateProgressBar :games="data.games" :losses="data.losses" :wins="data.wins"></WinrateProgressBar>
+      </p>
 
     </v-card-text>
 
@@ -43,10 +36,13 @@
 </template>
 
 <script>
+import WinrateProgressBar from "@/components/WinrateProgressBar";
+
 export default {
   name: "GameMode",
+  components: {WinrateProgressBar},
   props: {
-    data : Object,
+    data: Object,
     mode: Object
   },
 }
