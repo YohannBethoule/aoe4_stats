@@ -34,26 +34,19 @@
         color="rgba(0, 0, 0, 0.4)"
         hide-on-scroll
     >
+      <v-app-bar-nav-icon class="d-flex d-sm-none" left @click="drawer = true"></v-app-bar-nav-icon>
       <my-link classes="text-h5 text-no-wrap" text="AoE IV Analytics" to="/"></my-link>
-      <v-hover v-slot="{ hover }">
-        <router-link :class="hover? 'black--text': 'white--text text-decoration-underline'" :to="'/'"><span
-            class="text-h5 text-no-wrap"></span>
-        </router-link>
-      </v-hover>
-
-      <v-tabs centered class="hidden-sm-and-down">
+      <v-tabs centered class="d-none d-sm-inline-flex justify-center">
         <v-tab text to="/">Profile</v-tab>
         <v-tab text to="/leaderboards">Leaderboard</v-tab>
         <v-tab text to="/about">About</v-tab>
       </v-tabs>
-      <v-spacer class="hidden-lg-and-up"></v-spacer>
-      <v-app-bar-nav-icon class="hidden-lg-and-up" right @click="drawer = true"></v-app-bar-nav-icon>
     </v-app-bar>
 
     <v-navigation-drawer
         v-model="drawer"
         absolute
-        right
+        left
         temporary
     >
       <v-list
@@ -62,7 +55,7 @@
       >
         <v-list-item-group
             v-model="group"
-            active-class="deep-purple--text text--accent-4"
+            active-class=""
         >
           <v-list-item to="/">
             <v-list-item-title>Search</v-list-item-title>

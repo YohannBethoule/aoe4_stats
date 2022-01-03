@@ -18,12 +18,16 @@
         <v-skeleton-loader v-if="!playerLoaded" height="50" type="image" width="80"></v-skeleton-loader>
       </div>
 
-      <div class="tw-flex tw-justify-between tw-space-x-5 tw-my-5">
-        <GameMode v-for="mode in Object.keys(player.leaderboards)" :key="mode" :data="player.leaderboards[mode]"
-                  :mode="constantes.leaderboards.find(lb => lb.id == mode)"/>
-      </div>
-
-
+      <v-container grid-list-lg>
+        <v-layout>
+          <v-row>
+            <v-col v-for="mode in Object.keys(player.leaderboards)" :key="mode" class="col-12 col-md-4">
+              <GameMode :data="player.leaderboards[mode]"
+                        :mode="constantes.leaderboards.find(lb => lb.id == mode)"/>
+            </v-col>
+          </v-row>
+        </v-layout>
+      </v-container>
 
       <CivStatsHeavyCard
           :profile_id="profile_id"></CivStatsHeavyCard>

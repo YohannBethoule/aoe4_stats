@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="container mx-auto px-4 sm:px-8 ">
-      <div class="flex">
+    <div class="container tw-mx-auto tw-px-4 tw-sm:px-8 ">
+      <div class="tw-flex">
         <v-btn-toggle
             v-model="gameMode"
-            class="mx-auto"
+            class="tw-mx-auto"
             mandatory
         >
           <v-btn v-for="mode in constantes.leaderboards.filter(lb => lb.id != -1)" :key="mode.id" :value="mode.id"
