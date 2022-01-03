@@ -2,10 +2,10 @@
   <div>
     <span class="font-italic">(Below informations are computed from the match history. The latter being incomplete most of the time, you can note that the total number of games doesn't add up to the total displayed above.)</span>
 
-    <div class="tw-flex tw-items-center tw-justify-center tw-mb-10">
+    <div class="tw-flex tw-items-center tw-justify-center tw-mb-10 flex-wrap">
       <v-btn-toggle
           v-model="gameMode_id"
-          class="mr-10"
+          class="mr-10 flex-md-row flex-column"
           mandatory
       >
         <v-btn v-for="mode in constantes.leaderboards" :key="mode.id" :value="mode.id" type="button">
