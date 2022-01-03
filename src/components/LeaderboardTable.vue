@@ -7,40 +7,48 @@
       class="elevation-10 mt-15"
       item-class="text-xl"
       item-key="profile_id"
+      @click:row="goToProfile"
   >
+    <v-data-table-header :headers="headers">
+
+    </v-data-table-header>
     <template v-slot:item.name="{ item }">
       <router-link :to="'/profile/'+item.profile_id"> {{ item.name }}</router-link>
     </template>
     <template v-slot:item.winrate="{ item }">
-         <span :class="{ 'text-green-900' : (item.wins/item.games*100) > 51 ,
-                                     'text-orange-900' : (item.wins/item.games*100) < 51 && (item.wins/item.games*100) > 49,
-                                     'text-red-900' : (item.wins/item.games*100) < 49}">
-           {{ (item.wins / item.games * 100).toFixed(2) }} %
-         </span>
+      <div :style="$vuetify.breakpoint.mobile ? 'display: flex; width:100%; margin-right:40vw' : ''">
+        <WinrateProgressBar :games="item.games" :losses="item.losses" :wins="item.wins"></WinrateProgressBar>
+      </div>
     </template>
+
   </v-data-table>
 </template>
 
 <script>
+import WinrateProgressBar from "@/components/WinrateProgressBar";
+
 export default {
   name: "LeaderboardTable",
+  components: {WinrateProgressBar},
   props: {
     items: {}
   },
   data() {
     return {
       headers: [
-        {text: 'User', value: 'name'},
-        {text: 'Ranking', value: 'rank'},
-        {text: 'Elo', value: 'rating'},
-        {text: 'Games', value: 'games'},
-        {text: 'Wins', value: 'wins'},
-        {text: 'Losses', value: 'losses'},
-        {text: 'Winrate', value: 'winrate'},
-        {text: 'Country', value: 'country'},
+        {text: 'Ranking', value: 'rank', width: "1%"},
+        {text: 'User', value: 'name', width: "1%"},
+        {text: 'Elo', value: 'rating', width: "1%"},
+        {text: 'Country', value: 'country', width: "1%"},
+        {text: '', value: 'winrate', width: "10%", align: 'center', sortable: false},
       ],
     }
   },
+  methods: {
+    goToProfile(item) {
+      this.$router.push('/profile/' + item.profile_id)
+    }
+  }
 }
 </script>
 

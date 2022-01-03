@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <div class="container tw-mx-auto tw-px-4 tw-sm:px-8 ">
+    <v-container>
       <div class="tw-flex">
         <v-btn-toggle
             v-model="gameMode"
@@ -15,8 +14,7 @@
       </div>
 
       <LeaderboardTable :items="leaderboards[this.gameMode]"></LeaderboardTable>
-    </div>
-  </div>
+    </v-container>
 
 </template>
 

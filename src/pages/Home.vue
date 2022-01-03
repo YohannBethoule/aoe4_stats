@@ -1,12 +1,13 @@
 <template>
-  <div>
-    <div :class="$vuetify.breakpoint.smAndDown ? 'tw-flex-col tw-justify-center' : 'tw-flex'" class=" twgap-x-8">
+  <v-container class="align-center">
+    <div class="d-flex flex-column flex-sm-row justify-center">
       <v-text-field
           label="Search player name..."
           v-model="name"
           v-on:keyup.enter="searchId"
           solo
           light
+          class="flex-grow-0"
       ></v-text-field>
       <v-btn
           @click="searchId"
@@ -22,7 +23,7 @@
     <LeaderBoardTable v-if="leaderboards[-1].length > 0" :items="leaderboards[-1]"></LeaderBoardTable>
     <LoadingPage v-if="leaderboards[-1].length > 0 == 0 && initialSearch"></LoadingPage>
 
-  </div>
+  </v-container>
 </template>
 
 <script>
