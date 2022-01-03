@@ -82,7 +82,6 @@ export default {
     unselectPLayer() {
       this.selectedPlayer = null;
     },
-
     refreshData() {
       this.leaderboards = new Map(this.leaderboards)
       if (this.selectedPlayer){

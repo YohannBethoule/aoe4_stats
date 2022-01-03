@@ -15,6 +15,13 @@
     <p>
       This was made using the API from <a href="https://aoeiv.net/#api" target="_blank">aeoiv.net</a>
     </p>
+    <v-divider class="my-10"></v-divider>
+    <div class="text-h5 mb-5">Contact</div>
+    <p>
+      If you have any request about the project, feel free to open an issue on the github repository, or send an email
+      to :
+      <a href="mailto:aoe4.analytics@gmail.com">aoe4.analytics@gmail.com</a>
+    </p>
   </div>
 
 </template>
