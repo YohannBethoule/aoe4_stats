@@ -41,7 +41,7 @@ export default {
         plotOptions: {
           series: {
             marker: {
-              enabled: true
+              enabled: false
             }
           }
         },
