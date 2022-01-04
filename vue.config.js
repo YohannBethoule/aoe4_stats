@@ -1,5 +1,5 @@
 module.exports = {
-    publicPath: '/aoe4_stats/',
+    publicPath: '/',
     transpileDependencies: [
         'vuetify'
     ],
