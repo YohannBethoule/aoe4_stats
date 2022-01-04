@@ -94,6 +94,7 @@ const mutations = {
                         wins: globalLeaderboard.wins + element.wins,
                         losses: globalLeaderboard.losses + element.losses,
                         rating: Math.max(globalLeaderboard.rating, element.rating),
+                        rank: Math.min(globalLeaderboard.rank, element.rank),
                     })
                 }
                 Vue.set(state.all[profile_id].leaderboards, leaderboard_id, element)
