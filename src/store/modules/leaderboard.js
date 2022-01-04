@@ -4,7 +4,7 @@ import store from "@/store";
 // initial state
 // shape: [{ id, quantity }]
 const state = () => ({
-    '-1': [], //searching leaderboard
+    '-1': null, //searching leaderboard
     17: [],
     18: [],
     19: [],
@@ -20,7 +20,7 @@ const actions = {
     },
     searchLeaderboard({commit}, name) {
         //start by deleting the searching leaderboard
-        commit('setLeaderboard', {leaderboard_id, 'leaderboard': []})
+        commit('setLeaderboard', {leaderboard_id, 'leaderboard': null})
         let requests = [];
         let leaderboard_id = '-1'
         let leaderboard = [];

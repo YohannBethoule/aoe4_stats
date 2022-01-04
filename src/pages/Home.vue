@@ -20,8 +20,8 @@
     </div>
 
 
-    <LeaderBoardTable v-if="leaderboards[-1].length > 0" :items="leaderboards[-1]"></LeaderBoardTable>
-    <LoadingPage v-if="leaderboards[-1].length > 0 == 0 && initialSearch"></LoadingPage>
+    <LeaderBoardTable v-if="leaderboards[-1]" :items="leaderboards[-1]"></LeaderBoardTable>
+    <LoadingPage v-if="!leaderboards[-1] && initialSearch"></LoadingPage>
 
   </v-container>
 </template>

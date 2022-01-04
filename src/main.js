@@ -9,6 +9,12 @@ import PageLeaderboards from "@/pages/PageLeaderboards";
 import store from './store'
 import About from "@/pages/PageAbout";
 import Profile from "@/pages/PageProfile";
+import HighchartsVue from "highcharts-vue";
+import Highcharts from "highcharts";
+import darkUnica from "highcharts/themes/dark-unica";
+
+darkUnica(Highcharts);
+Vue.use(HighchartsVue);
 
 Vue.config.productionTip = false
 

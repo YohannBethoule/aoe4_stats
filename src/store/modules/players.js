@@ -61,11 +61,23 @@ const mutations = {
             Vue.set(state.all, profile_id, {gameHistory: gameHistory.data})
         }
     },
-    setRatingHistory(state, {profile_id, ratingHistory}) {
+    setRatingHistory(state, {profile_id, leaderboard_id, ratingHistory}) {
+        // if (state.all[profile_id]) {
+        //     Vue.set(state.all[profile_id], 'ratingHistory', ratingHistory.data)
+        // } else {
+        //     Vue.set(state.all, profile_id, {ratingHistory: ratingHistory.data})
+        // }
+        const element = ratingHistory.data;
+
         if (state.all[profile_id]) {
-            Vue.set(state.all[profile_id], 'ratingHistory', ratingHistory.data)
+            if (state.all[profile_id].ratingHistory) {
+                Vue.set(state.all[profile_id].ratingHistory, leaderboard_id, element)
+            } else {
+                Vue.set(state.all[profile_id], 'ratingHistory', {[leaderboard_id]: element})
+            }
         } else {
-            Vue.set(state.all, profile_id, {ratingHistory: ratingHistory.data})
+            Vue.set(state.all, profile_id, {ratingHistory: {[leaderboard_id]: element}})
+            // Vue.set(state.all, profile_id, leaderboard.data.leaderboard[0])
         }
     },
     setPlayerLeaderboard(state, {profile_id, leaderboard_id, leaderboard}) {
