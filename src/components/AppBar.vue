@@ -37,7 +37,7 @@
       <v-app-bar-nav-icon class="d-flex d-sm-none" left @click="drawer = true"></v-app-bar-nav-icon>
       <my-link classes="text-h5 text-no-wrap" text="AoE IV Analytics" to="/"></my-link>
       <v-icon class="ml-2 d-none d-sm-inline-flex">mdi-chart-areaspline</v-icon>
-      <v-tabs centered class="d-none d-sm-inline-flex justify-center">
+      <v-tabs centered class="d-none d-sm-inline-flex justify-center text-white" color="white">
         <v-tab text to="/">Profile</v-tab>
         <v-tab text to="/leaderboards">Leaderboard</v-tab>
         <v-tab text to="/about">About</v-tab>
