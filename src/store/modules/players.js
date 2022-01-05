@@ -25,10 +25,10 @@ const actions = {
     },
     refreshPlayerData({dispatch}, profile_id) {
         dispatch('getGameHistory', profile_id)
-        dispatch('getRatingHistory', {'leaderboard_id': 17, 'profile_id': profile_id})
         store.state.constantes.all.leaderboards.forEach(mode => {
             if (mode.id == -1) return;
             dispatch('getPlayerLeaderboard', {leaderboard_id: mode.id, profile_id: profile_id})
+            dispatch('getRatingHistory', {'leaderboard_id': mode.id, 'profile_id': profile_id})
         })
     }
 }

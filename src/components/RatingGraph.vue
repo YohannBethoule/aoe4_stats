@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="flex">
     <highcharts :options="chartOptions"></highcharts>
   </div>
 

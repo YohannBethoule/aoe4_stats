@@ -33,9 +33,10 @@ const getters = {
         if (!state.all.leaderboards) return '';
         return state.all.leaderboards.find(lb => lb.id == leaderboard_id)?.label
     },
-    gameModeNameFromNumSlots: (state) => (num_slots) => {
+    gameModeFromNumSlotsAndLeaderBoardId: (state) => (num_slots, leaderboard_id) => {
         if (!state.all.leaderboards) return '';
-        return state.all.leaderboards.find(lb => lb.nbPlayers == num_slots)?.label
+        if (leaderboard_id === 0) return state.all.leaderboards.find(lb => lb.id === 0);
+        return state.all.leaderboards.find(lb => lb.nbPlayers == num_slots)
     },
 }
 
@@ -52,24 +53,34 @@ const mutations = {
                 nbPlayers: 0
             },
             {
+                id: 0,
+                label: 'Custom',
+                chipColor: '#CC8F00',
+                nbPlayers: -1
+            },
+            {
                 id: 17,
                 label: 'QM 1v1',
+                chipColor: '#6930c3',
                 nbPlayers: 2
             },
             {
                 id: 18,
                 label: 'QM 2v2',
+                chipColor: '#5e60ce',
                 nbPlayers: 4
             },
             {
                 id: 19,
                 label: 'QM 3v3',
-                nbPlayers: 8
+                chipColor: '#118ab2',
+                nbPlayers: 6
             },
             {
                 id: 20,
                 label: 'QM 4v4',
-                nbPlayers: 16
+                chipColor: '#073b4c',
+                nbPlayers: 8
             },
         ]
     },
