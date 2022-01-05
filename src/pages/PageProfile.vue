@@ -21,7 +21,7 @@
       <v-container grid-list-lg>
         <v-layout>
           <v-row>
-            <v-col v-for="mode in Object.keys(player.leaderboards)" :key="mode" class="col-12 col-md-4">
+            <v-col v-for="mode in Object.keys(player.leaderboards).sort()" :key="mode" class="col-12 col-md-4">
               <GameMode :data="player.leaderboards[mode]"
                         :mode="constantes.leaderboards.find(lb => lb.id == mode)"
                         :rating-history="player.ratingHistory[mode]"/>

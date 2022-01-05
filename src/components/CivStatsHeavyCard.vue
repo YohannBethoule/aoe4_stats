@@ -5,13 +5,22 @@
     <div class="tw-flex tw-items-center tw-justify-center tw-mb-10 flex-wrap">
       <v-btn-toggle
           v-model="gameMode_id"
-          class="mr-10 flex-md-row flex-column"
+          class="mr-10 d-none d-md-flex flex-row"
           mandatory
       >
         <v-btn v-for="mode in constantes.leaderboards" :key="mode.id" :value="mode.id" type="button">
           {{ mode.label }} ({{ getGameCountByMode(mode.id) }})
         </v-btn>
       </v-btn-toggle>
+      <v-select
+          v-model="gameMode_id"
+          :item-text="item => item.label + ' (' + getGameCountByMode(item.id) + ')'"
+          :items="constantes.leaderboards"
+          class="pt-7 d-flex d-md-none"
+          item-value="id"
+          label="Select game mode"
+          solo
+      ></v-select>
       <v-select
           v-model="civ_id"
           :item-text="item => getCivName(item.id) + ' (' + getGameCountByCiv(item.id) + ')'"

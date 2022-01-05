@@ -3,15 +3,24 @@
       <div class="tw-flex">
         <v-btn-toggle
             v-model="gameMode"
-            class="tw-mx-auto"
+            class="tw-mx-auto d-none d-md-flex flex-md-row flex-column"
             mandatory
         >
-          <v-btn v-for="mode in constantes.leaderboards.filter(lb => lb.id != -1)" :key="mode.id" :value="mode.id"
+          <v-btn v-for="mode in constantes.leaderboards.filter(lb => lb.id > 0)" :key="mode.id" :value="mode.id"
                  type="button">
             {{ mode.label }}
           </v-btn>
         </v-btn-toggle>
       </div>
+      <v-select
+          v-model="gameMode"
+          :items="constantes.leaderboards.filter(lb => lb.id > 0)"
+          class="pt-7 d-flex d-md-none"
+          item-text="label"
+          item-value="id"
+          label="Select game mode"
+          solo
+      ></v-select>
 
       <LeaderboardTable :items="leaderboards[this.gameMode]"></LeaderboardTable>
     </v-container>
