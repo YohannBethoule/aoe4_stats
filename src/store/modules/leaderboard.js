@@ -9,6 +9,7 @@ const state = () => ({
     18: [],
     19: [],
     20: [],
+    searching: false
 })
 
 // actions
@@ -20,6 +21,7 @@ const actions = {
     },
     searchLeaderboard({commit}, name) {
         //start by deleting the searching leaderboard
+        commit('setSearching', true)
         commit('setLeaderboard', {leaderboard_id, 'leaderboard': null})
         let requests = [];
         let leaderboard_id = '-1'
@@ -42,6 +44,7 @@ const actions = {
                 })
             })
             commit('setLeaderboard', {leaderboard_id, leaderboard})
+            commit('setSearching', false)
         })
     }
 }
@@ -55,7 +58,9 @@ const mutations = {
     setLeaderboard(state, {leaderboard_id, leaderboard}) {
         state[leaderboard_id] = leaderboard
     },
-
+    setSearching(state, value) {
+        state.searching = value;
+    },
 }
 
 export default {
