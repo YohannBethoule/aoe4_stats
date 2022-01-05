@@ -3,7 +3,7 @@
     <LoadingPage v-if="!playerLoaded"></LoadingPage>
     <div v-if="playerLoaded">
 
-      <div class="text-md-h3 tw-flex mb-10">
+      <div class="text-h3 tw-flex mb-10">
         <span class="mr-5">{{ player.leaderboards['-1'].name }}</span>
         <v-tooltip right>
           <template v-slot:activator="{ on }">
@@ -23,7 +23,8 @@
           <v-row>
             <v-col v-for="mode in Object.keys(player.leaderboards)" :key="mode" class="col-12 col-md-4">
               <GameMode :data="player.leaderboards[mode]"
-                        :mode="constantes.leaderboards.find(lb => lb.id == mode)"/>
+                        :mode="constantes.leaderboards.find(lb => lb.id == mode)"
+                        :rating-history="player.ratingHistory[mode]"/>
             </v-col>
           </v-row>
         </v-layout>

@@ -25,10 +25,10 @@ const actions = {
     },
     refreshPlayerData({dispatch}, profile_id) {
         dispatch('getGameHistory', profile_id)
-        dispatch('getRatingHistory', {'leaderboard_id': 17, 'profile_id': profile_id})
         store.state.constantes.all.leaderboards.forEach(mode => {
             if (mode.id == -1) return;
             dispatch('getPlayerLeaderboard', {leaderboard_id: mode.id, profile_id: profile_id})
+            dispatch('getRatingHistory', {'leaderboard_id': mode.id, 'profile_id': profile_id})
         })
     }
 }
@@ -61,11 +61,23 @@ const mutations = {
             Vue.set(state.all, profile_id, {gameHistory: gameHistory.data})
         }
     },
-    setRatingHistory(state, {profile_id, ratingHistory}) {
+    setRatingHistory(state, {profile_id, leaderboard_id, ratingHistory}) {
+        // if (state.all[profile_id]) {
+        //     Vue.set(state.all[profile_id], 'ratingHistory', ratingHistory.data)
+        // } else {
+        //     Vue.set(state.all, profile_id, {ratingHistory: ratingHistory.data})
+        // }
+        const element = ratingHistory.data;
+
         if (state.all[profile_id]) {
-            Vue.set(state.all[profile_id], 'ratingHistory', ratingHistory.data)
+            if (state.all[profile_id].ratingHistory) {
+                Vue.set(state.all[profile_id].ratingHistory, leaderboard_id, element)
+            } else {
+                Vue.set(state.all[profile_id], 'ratingHistory', {[leaderboard_id]: element})
+            }
         } else {
-            Vue.set(state.all, profile_id, {ratingHistory: ratingHistory.data})
+            Vue.set(state.all, profile_id, {ratingHistory: {[leaderboard_id]: element}})
+            // Vue.set(state.all, profile_id, leaderboard.data.leaderboard[0])
         }
     },
     setPlayerLeaderboard(state, {profile_id, leaderboard_id, leaderboard}) {
@@ -82,6 +94,7 @@ const mutations = {
                         wins: globalLeaderboard.wins + element.wins,
                         losses: globalLeaderboard.losses + element.losses,
                         rating: Math.max(globalLeaderboard.rating, element.rating),
+                        rank: Math.min(globalLeaderboard.rank, element.rank),
                     })
                 }
                 Vue.set(state.all[profile_id].leaderboards, leaderboard_id, element)

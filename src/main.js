@@ -9,6 +9,12 @@ import PageLeaderboards from "@/pages/PageLeaderboards";
 import store from './store'
 import About from "@/pages/PageAbout";
 import Profile from "@/pages/PageProfile";
+import HighchartsVue from "highcharts-vue";
+import Highcharts from "highcharts";
+import darkUnica from "highcharts/themes/dark-unica";
+
+darkUnica(Highcharts);
+Vue.use(HighchartsVue);
 
 Vue.config.productionTip = false
 
@@ -31,7 +37,8 @@ const routes = [
 // You can pass in additional options here, but let's
 // keep it simple for now.
 const router = new VueRouter({
-    routes // short for `routes: routes`
+    routes, // short for `routes: routes`>
+    mode: 'history'
 })
 
 new Vue({
