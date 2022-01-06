@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto px-4 sm:px-8 ">
+  <div class="container mx-auto px-4 sm:px-8 text-body-1">
     <div class="text-h5 mb-5">About me
       <v-icon>mdi-account-circle-outline</v-icon>
     </div>
@@ -20,7 +20,7 @@
     <div class="text-h5 mb-5">Check the sources
       <v-icon>mdi-book-open-blank-variant</v-icon>
     </div>
-    <p>
+    <p class="text-body-1">
       You can find the source code of the application over there : <a
         href="https://github.com/YohannBethoule/aoe4_stats"
         target="_blank">https://github.com/YohannBethoule/aoe4_stats</a>

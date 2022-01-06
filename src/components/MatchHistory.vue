@@ -20,9 +20,9 @@
 
       <template v-slot:item.num_slots="{ item }">
         <v-chip
-            :color="gameModeFromNumSlotsAndLeaderBoardId(item.num_slots, item.leaderboard_id).chipColor"
+            :color="gameMode(item.leaderboard_id).chipColor"
         >
-          {{ gameModeFromNumSlotsAndLeaderBoardId(item.num_slots, item.leaderboard_id).label }}
+          {{ gameMode(item.leaderboard_id).label }}
         </v-chip>
       </template>
 
@@ -101,7 +101,7 @@ export default {
   computed: {
     ...mapGetters({
       getPlayer: 'players/player',
-      gameModeFromNumSlotsAndLeaderBoardId: 'constantes/gameModeFromNumSlotsAndLeaderBoardId',
+      gameMode: 'constantes/gameMode'
     }),
     ...mapState({
       constantes: state => state.constantes.all,
