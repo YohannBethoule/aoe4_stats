@@ -32,12 +32,7 @@ const getters = {
     gameModeName: (state) => (leaderboard_id) => {
         if (!state.all.leaderboards) return '';
         return state.all.leaderboards.find(lb => lb.id == leaderboard_id)?.label
-    },
-    gameModeFromNumSlotsAndLeaderBoardId: (state) => (num_slots, leaderboard_id) => {
-        if (!state.all.leaderboards) return '';
-        if (leaderboard_id === 0) return state.all.leaderboards.find(lb => lb.id === 0);
-        return state.all.leaderboards.find(lb => lb.nbPlayers == num_slots)
-    },
+    }
 }
 
 

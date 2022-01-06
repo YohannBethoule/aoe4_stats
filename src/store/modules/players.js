@@ -6,10 +6,21 @@ const state = () => ({
     all: {}
 })
 
+const getMatchLeaderboardId = (match) => {
+    if (!store.state.constantes.all.leaderboards) return null;
+    if (match.leaderboard_id !== undefined) return match.leaderboard_id;
+
+    return store.state.constantes.all.leaderboards.find(leaderboard => {
+        return match.num_slots === leaderboard.nbPlayers
+    }).id
+}
+
 // actions
 const actions = {
     getGameHistory({commit}, profile_id) {
         api.getGameHistory(profile_id, gameHistory => {
+            console.log('coucou', gameHistory)
+
             commit('setGameHistory', {profile_id, gameHistory})
         })
     },
@@ -55,10 +66,13 @@ const getters = {
 // mutations
 const mutations = {
     setGameHistory(state, {profile_id, gameHistory}) {
+        for (let game of gameHistory) {
+            game.leaderboard_id = getMatchLeaderboardId(game);
+        }
         if (state.all[profile_id]) {
-            Vue.set(state.all[profile_id], 'gameHistory', gameHistory.data)
+            Vue.set(state.all[profile_id], 'gameHistory', gameHistory)
         } else {
-            Vue.set(state.all, profile_id, {gameHistory: gameHistory.data})
+            Vue.set(state.all, profile_id, {gameHistory: gameHistory})
         }
     },
     setRatingHistory(state, {profile_id, leaderboard_id, ratingHistory}) {

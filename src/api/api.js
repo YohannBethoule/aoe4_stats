@@ -22,7 +22,7 @@ export default {
         axios
             .get('https://aoeiv.net/api/player/matches?game=aoe4&count=1000&profile_id=' + profile_id)
             .then(response => {
-                callback(response)
+                callback(response.data)
             });
     },
     getRatingHistory(leaderboard_id, profile_id, callback) {

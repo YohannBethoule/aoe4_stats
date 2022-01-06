@@ -119,23 +119,14 @@ export default {
       if (!this.player.gameHistory) return [];
       return this.player.gameHistory
           .filter(match => match.players.find(player => player.profile_id == this.profile_id).civ === this.civ.id || this.civ.id === -1)
-          .filter(match => {
-            if (this.gameMode.id === 0) {
-              return match.leaderboard_id === this.gameMode.id;
-            }
-            return (match.num_slots === this.gameMode.nbPlayers && match.leaderboard_id !== 0) || this.gameMode.nbPlayers === 0;
-          })
+          .filter(match => match.leaderboard_id === this.gameMode.id || this.gameMode.id === -1)
     },
     getGameCount() {
       return this.games().length
     },
     getGameCountByMode(leaderboard_id) {
-      if (leaderboard_id === 0) {
-        return this.player.gameHistory
-            .filter(match => match.leaderboard_id === leaderboard_id).length
-      }
       return this.player.gameHistory
-          .filter(match => (match.num_slots === this.getMode(leaderboard_id)?.nbPlayers && match.leaderboard_id !== 0)).length
+          .filter(match => (match.leaderboard_id === leaderboard_id) | leaderboard_id === -1).length
     },
     getGameCountByCiv(civ_id) {
       return this.player.gameHistory
