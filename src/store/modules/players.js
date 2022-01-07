@@ -19,8 +19,6 @@ const getMatchLeaderboardId = (match) => {
 const actions = {
     getGameHistory({commit}, profile_id) {
         api.getGameHistory(profile_id, gameHistory => {
-            console.log('coucou', gameHistory)
-
             commit('setGameHistory', {profile_id, gameHistory})
         })
     },
@@ -76,11 +74,6 @@ const mutations = {
         }
     },
     setRatingHistory(state, {profile_id, leaderboard_id, ratingHistory}) {
-        // if (state.all[profile_id]) {
-        //     Vue.set(state.all[profile_id], 'ratingHistory', ratingHistory.data)
-        // } else {
-        //     Vue.set(state.all, profile_id, {ratingHistory: ratingHistory.data})
-        // }
         const element = ratingHistory.data;
 
         if (state.all[profile_id]) {
