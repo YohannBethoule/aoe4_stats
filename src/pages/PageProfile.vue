@@ -3,7 +3,7 @@
     <LoadingPage v-if="!playerLoaded"></LoadingPage>
     <div v-if="playerLoaded">
 
-      <div class="text-h3 tw-flex mb-10">
+      <div class="text-h3 d-flex mb-10 flex-wrap">
         <span class="mr-5">{{ player.leaderboards['-1'].name }}</span>
         <v-tooltip right>
           <template v-slot:activator="{ on }">
@@ -16,6 +16,16 @@
         </v-tooltip>
 
         <v-skeleton-loader v-if="!playerLoaded" height="50" type="image" width="80"></v-skeleton-loader>
+
+        <v-btn
+            class="ml-auto"
+            dark
+            rounded
+            @click="refreshPlayerData(player.profile_id)"
+        >
+          <v-icon>mdi-repeat-variant</v-icon>
+          Refresh data
+        </v-btn>
       </div>
 
       <v-container grid-list-lg>
@@ -74,6 +84,11 @@ export default {
   },
   created() {
     if (!this.player.leaderboards) {
+      this.$store.dispatch('players/refreshPlayerData', this.profile_id);
+    }
+  },
+  methods: {
+    refreshPlayerData() {
       this.$store.dispatch('players/refreshPlayerData', this.profile_id);
     }
   }
