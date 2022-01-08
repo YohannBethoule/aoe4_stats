@@ -46,40 +46,25 @@
           contain max-height="50" max-width="80"></v-img>
 
     </span>
-
-
-    <!--    <v-card-->
-    <!--        class="mb-5"-->
-    <!--        elevation="15"-->
-    <!--    >-->
-    <!--          <v-card-title>-->
-
-    <!--            <span class="text-h6">{{civ.string}}</span>-->
-    <!--          </v-card-title>-->
-    <!--          <v-card-text class="flex space-x-16">-->
-    <!--            <v-img-->
-    <!--                contain-->
-    <!--                v-if="civ.id >= 0"-->
-    <!--                :src="require(`@/assets/flags/${civ.id}.webp`)" max-height="300" max-width="400"></v-img>-->
-    <!--            <div class="flex flex-col">-->
-    <!--              <p >-->
-    <!--                {{ getModeName(this.gameMode.id) }} - {{ getGameCountByMode(this.gameMode.id) }} matches played-->
-    <!--              </p>-->
-    <!--            </div>-->
-    <!--          </v-card-text>-->
-
-    <!--    </v-card>-->
+    <div v-if="gameMode.nbPlayers > 2" class="mb-10">
+      <div class="text-h5">Friends</div>
+      <div class="d-flex flex-row flex-wrap tw-space-x-5 mt-2">
+        <MatchHistoryPlayerCard v-for="friend in friends" :key="friend.profile_id" :is-ally="true"
+                                :player="friend"></MatchHistoryPlayerCard>
+      </div>
+    </div>
     <MatchHistory :games="games()" :profile_id="profile_id"></MatchHistory>
   </div>
 </template>
 
 <script>
 import MatchHistory from "@/components/MatchHistory";
+import MatchHistoryPlayerCard from "@/components/MatchHistoryPlayerCard";
 import {mapGetters, mapState} from "vuex";
 
 export default {
   name: "CivStatsHeavyCard",
-  components: {MatchHistory},
+  components: {MatchHistory, MatchHistoryPlayerCard},
   props: {
     profile_id: String,
   },
@@ -112,6 +97,27 @@ export default {
     },
     playerLoaded() {
       return this.player && this.player.leaderboards && this.player.gameHistory
+    },
+    friends() {
+      if (this.gameMode.nbPlayers <= 2) return [];
+      let allys = {};
+      for (let game of this.games()) {
+        const team_id = game.players.find(p => p.profile_id == this.profile_id).team;
+
+        for (let player of game.players.filter(p => p.team === team_id && p.profile_id != this.profile_id)) {
+          if (allys[player.profile_id]) {
+            allys[player.profile_id].nbGames++;
+          } else {
+            allys[player.profile_id] = {...player};
+            allys[player.profile_id].nbGames = 1;
+          }
+        }
+      }
+      return Object.fromEntries(
+          Object.entries(allys).filter(([, value]) => {
+                return value.nbGames > 5
+              }
+          ))
     }
   },
   methods: {
@@ -131,7 +137,7 @@ export default {
     getGameCountByCiv(civ_id) {
       return this.player.gameHistory
           .filter(match => match.players.find(player => player.profile_id == this.profile_id).civ === civ_id || civ_id === -1).length
-    }
+    },
   },
 }
 </script>
