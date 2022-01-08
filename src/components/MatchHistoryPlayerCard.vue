@@ -3,14 +3,17 @@
         elevation="15"
         rounded
         min-height="100"
-        class="tw-m-5 tw-p-5 white--text"
-        height="100"
+        class="tw-p-5 white--text"
         :color="isAlly ? 'blue' : 'red'"
         min-width="300"
     >
 
       <div>
         <my-link :text="player.name" :to="'/profile/'+player.profile_id" classes="text-lg-h6"></my-link>
+      </div>
+
+      <div v-if="player.nbGames">
+        {{ player.nbGames }} games together
       </div>
 
       <div>
