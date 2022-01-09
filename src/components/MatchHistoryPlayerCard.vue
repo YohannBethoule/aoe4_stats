@@ -3,7 +3,7 @@
         elevation="15"
         rounded
         min-height="100"
-        class="tw-p-5 white--text"
+        class="tw-p-5 white--text mt-5 mr-10"
         :color="isAlly ? 'blue' : 'red'"
         min-width="300"
     >
