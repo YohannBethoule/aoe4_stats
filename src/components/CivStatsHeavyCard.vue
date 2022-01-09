@@ -46,7 +46,7 @@
           contain max-height="50" max-width="80"></v-img>
 
     </span>
-    <div v-if="gameMode.nbPlayers > 2 && friends.length > 0" class="mb-10">
+    <div v-if="gameMode.nbPlayers > 2 && Object.entries(friends).length > 0" class="mb-10">
       <div class="text-h5">Friends</div>
       <div class="d-flex flex-row flex-wrap tw-space-x-5 mt-2">
         <MatchHistoryPlayerCard v-for="friend in friends" :key="friend.profile_id" :is-ally="true"
