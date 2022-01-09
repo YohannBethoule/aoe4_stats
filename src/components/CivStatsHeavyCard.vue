@@ -46,9 +46,16 @@
           contain max-height="50" max-width="80"></v-img>
 
     </span>
-    <div v-if="gameMode.nbPlayers > 2 && Object.entries(friends).length > 0" class="mb-10">
-      <div class="text-h5">Friends</div>
-      <div class="d-flex flex-row flex-wrap tw-space-x-5 mt-2">
+    <div v-if="gameMode.nbPlayers != 1 && Object.entries(friends).length > 0" class="mb-10">
+      <div class="text-h5">
+        <v-tooltip right>
+          <template v-slot:activator="{ on }">
+            <span v-on="on">Friends<v-icon class="ml-2">mdi-information-outline</v-icon></span>
+          </template>
+          <span>Played more than 5 games together</span>
+        </v-tooltip>
+      </div>
+      <div class="d-flex flex-row flex-wrap">
         <MatchHistoryPlayerCard v-for="friend in friends" :key="friend.profile_id" :is-ally="true"
                                 :player="friend"></MatchHistoryPlayerCard>
       </div>
@@ -99,7 +106,7 @@ export default {
       return this.player && this.player.leaderboards && this.player.gameHistory
     },
     friends() {
-      if (this.gameMode.nbPlayers <= 2) return [];
+      if (this.gameMode.nbPlayers == 1) return [];
       let allys = {};
       for (let game of this.games()) {
         const team_id = game.players.find(p => p.profile_id == this.profile_id).team;
