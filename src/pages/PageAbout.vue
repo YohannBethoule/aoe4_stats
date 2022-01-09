@@ -26,7 +26,7 @@
     <CustomCard icon="mdi-open-in-new" title="External links">
       <v-list class="pa-0" color="rgba(0, 0, 0, 0)" three-line>
         <template>
-          <v-subheader class="pa-0 text-body-1 text--primary">Here are some others great ressources for Age of Empire 4
+          <v-subheader class="pa-0 text-body-1 text--primary">Here are some other great ressources for Age of Empire 4
             :
           </v-subheader>
 
