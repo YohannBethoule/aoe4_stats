@@ -8,7 +8,7 @@
         item-key="match_id"
         show-expand
         :items-per-page="10"
-        class="elevation-10"
+        class="elevation-10 table-background"
     >
       <template v-slot:item.started="{ item }">
         {{new Date(item.started * 1000).toLocaleString()}}

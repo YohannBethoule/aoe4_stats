@@ -4,7 +4,8 @@
       :items="items"
       :items-per-page="100"
       :loading="items.length === 0"
-      class="elevation-10 mt-15"
+      class="elevation-10 mt-15 table-background"
+      color="rgba(0,0,0,0.3)"
       item-class="text-xl"
       item-key="profile_id"
       @click:row="goToProfile"
@@ -53,5 +54,7 @@ export default {
 </script>
 
 <style scoped>
-
+.table-background {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+}
 </style>

@@ -48,4 +48,7 @@ export default {
 </script>
 
 <style>
+.table-background {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+}
 </style>
