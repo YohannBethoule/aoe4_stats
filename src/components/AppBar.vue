@@ -46,6 +46,7 @@
 
     <v-navigation-drawer
         v-model="drawer"
+        color="rgba(0, 0, 0, 0.9)"
         absolute
         left
         temporary
@@ -53,9 +54,12 @@
       <v-list
           dense
           nav
+          centered
+          height="100vh"
       >
         <v-list-item-group
             v-model="group"
+            class="align-center justify-center fill-height"
             active-class=""
         >
           <v-list-item to="/">
