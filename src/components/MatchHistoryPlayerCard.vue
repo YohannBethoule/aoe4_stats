@@ -12,8 +12,11 @@
         <my-link :text="player.name" :to="'/profile/'+player.profile_id" classes="text-lg-h6"></my-link>
       </div>
 
-      <div v-if="player.nbGames">
+      <div v-if="player.nbGames && isAlly">
         {{ player.nbGames }} games together
+      </div>
+      <div v-if="player.nbGames && !isAlly">
+        {{ player.nbGames }} games against
       </div>
 
       <div>
