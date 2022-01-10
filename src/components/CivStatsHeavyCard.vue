@@ -60,6 +60,20 @@
                                 :player="friend"></MatchHistoryPlayerCard>
       </div>
     </div>
+    <div v-if="Object.entries(rivals).length > 0" class="mb-10">
+      <div class="text-h5">
+        <v-tooltip right>
+          <template v-slot:activator="{ on_rivals }">
+            <span v-on="on_rivals">Rivals<v-icon class="ml-2">mdi-information-outline</v-icon></span>
+          </template>
+          <span>Played more than 5 games against</span>
+        </v-tooltip>
+      </div>
+      <div class="d-flex flex-row flex-wrap">
+        <MatchHistoryPlayerCard v-for="rival in rivals" :key="rival.profile_id" :is-ally="false"
+                                :player="rival"></MatchHistoryPlayerCard>
+      </div>
+    </div>
     <MatchHistory :games="games()" :profile_id="profile_id"></MatchHistory>
   </div>
 </template>
@@ -122,6 +136,26 @@ export default {
       }
       return Object.fromEntries(
           Object.entries(allys).filter(([, value]) => {
+                return value.nbGames > 5
+              }
+          ))
+    },
+    rivals() {
+      let ennemys = {};
+      for (let game of this.games()) {
+        const team_id = game.players.find(p => p.profile_id == this.profile_id).team;
+
+        for (let player of game.players.filter(p => p.team !== team_id)) {
+          if (ennemys[player.profile_id]) {
+            ennemys[player.profile_id].nbGames++;
+          } else {
+            ennemys[player.profile_id] = {...player};
+            ennemys[player.profile_id].nbGames = 1;
+          }
+        }
+      }
+      return Object.fromEntries(
+          Object.entries(ennemys).filter(([, value]) => {
                 return value.nbGames > 5
               }
           ))
