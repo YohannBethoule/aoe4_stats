@@ -63,8 +63,8 @@
     <div v-if="Object.entries(rivals).length > 0" class="mb-10">
       <div class="text-h5">
         <v-tooltip right>
-          <template v-slot:activator="{ on_rivals }">
-            <span v-on="on_rivals">Rivals<v-icon class="ml-2">mdi-information-outline</v-icon></span>
+          <template v-slot:activator="{ on }">
+            <span v-on="on">Rivals<v-icon class="ml-2">mdi-information-outline</v-icon></span>
           </template>
           <span>Played more than 5 games against</span>
         </v-tooltip>
