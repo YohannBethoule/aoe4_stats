@@ -9,6 +9,7 @@ import PageLeaderboards from "@/pages/PageLeaderboards";
 import store from './store'
 import About from "@/pages/PageAbout";
 import Profile from "@/pages/PageProfile";
+import Randomizer from "@/pages/PageRandomizer";
 import HighchartsVue from "highcharts-vue";
 import Highcharts from "highcharts";
 import darkUnica from "highcharts/themes/dark-unica";
@@ -31,6 +32,7 @@ const routes = [
     {path: '/profile/:profile_id', component: Profile, props: true},
     {path: '/leaderboards', component: PageLeaderboards},
     {path: '/about', component: About},
+    {path: '/randomizer', component: Randomizer},
 ]
 
 // 3. Create the router instance and pass the `routes` option

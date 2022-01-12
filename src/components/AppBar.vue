@@ -40,6 +40,7 @@
       <v-tabs centered class="d-none d-sm-inline-flex justify-center text-white" color="white">
         <v-tab text to="/">Profile</v-tab>
         <v-tab text to="/leaderboards">Leaderboard</v-tab>
+        <v-tab text to="/randomizer">Random tool</v-tab>
         <v-tab text to="/about">About</v-tab>
       </v-tabs>
     </v-app-bar>
@@ -72,6 +73,10 @@
 
           <v-list-item to="/about">
             <v-list-item-title>About</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item to="/randomizer">
+            <v-list-item-title>Random tool</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
       </v-list>
