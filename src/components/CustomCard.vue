@@ -3,7 +3,7 @@
     <v-card-title>{{ title }}
       <v-icon v-if="icon" class="ml-2">{{ icon }}</v-icon>
     </v-card-title>
-    <v-card-text class="text-body-1 text--primary">
+    <v-card-text class="text-body-1 text--primary d-flex flex-column">
       <slot></slot>
     </v-card-text>
   </v-card>

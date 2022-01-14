@@ -1,19 +1,49 @@
 <template>
-  <CustomCard :max-width="400" :title="title" class="justify-content flex-grow-1">
-    <div class="d-flex flex-column ">
-      <v-carousel
-          :cycle="cycle"
-          class="my-auto"
-          height="100%"
-          hide-delimiters
-          interval="100"
+  <CustomCard :max-height="300" :max-width="500" :title="title" class="justify-content flex-grow-1 ">
+    <v-carousel
+        :cycle="cycle"
+        class="my-auto"
+        hide-delimiters
+        height="300"
+        interval="50"
+    >
+      <v-carousel-item
+          v-for="(item, i) in truc.filter(elem => !vetos.includes(elem.id))"
+          :key="i"
       >
-        <slot></slot>
+        <v-img
+            :src="require(`@/assets/${imgPath + item.id + '.' + imgExt}`)" aspect-ratio="1"
+            contain
+            height="300"
+        >
+          <v-row
+              align="center"
+              class="fill-height"
+              justify="center"
+          >
+            <p class="text-h4 text-shadow">
+              {{ item[labelProperty] }}
+            </p>
+          </v-row>
+        </v-img>
 
-      </v-carousel>
-      <div class="d-flex justify-center mt-5">
-        <v-btn class="tw-mx-auto" @click="randomCycle()">Get random</v-btn>
-      </div>
+      </v-carousel-item>
+
+    </v-carousel>
+    <div class="d-flex flex-column justify-center mt-5">
+      <v-btn class="tw-mx-auto" @click="randomCycle()">Get random</v-btn>
+      <div class="text-h6 my-3">Veto</div>
+      <v-select
+          v-model="vetos"
+          :item-text="labelProperty"
+          :items="truc"
+          attach
+          chips
+          class=""
+          item-value="id"
+          multiple
+          outlined
+      ></v-select>
     </div>
 
   </CustomCard>
@@ -29,11 +59,17 @@ export default {
     CustomCard
   },
   props: {
-    title: String
+    title: String,
+    truc: Array,
+    labelProperty: String,
+    imgSrc: String,
+    imgPath: String,
+    imgExt: String,
   },
   data() {
     return {
       cycle: false,
+      vetos: []
     }
   },
   computed: mapState({
@@ -41,8 +77,8 @@ export default {
   }),
   methods: {
     getRandomTimeout() {
-      const max = 3000
-      const min = 2000
+      const max = 2000
+      const min = 1000
       return Math.random() * (max - min) + min;
     },
     randomCycle() {
@@ -56,5 +92,7 @@ export default {
 </script>
 
 <style scoped>
-
+.text-shadow {
+  text-shadow: 3px 3px #000000;
+}
 </style>

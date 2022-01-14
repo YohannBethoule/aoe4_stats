@@ -1,57 +1,18 @@
 <template>
-  <v-container class="d-flex flex-column flex-md-row  justify-space-around">
+  <v-container class="d-flex flex-column  justify-space-around">
 
     <LoadingPage v-if="!constantes"></LoadingPage>
-    <CarouselRandomizer class="mr-5" title="Maps">
-      <v-carousel-item
+    <p class="text-h5">Quickly setup random maps and civilizations for your Age of Empire 4 custom games, with the
+      ability to veto.</p>
+    <div class="d-flex flex-column flex-md-row justify-space-around">
+      <CarouselRandomizer :truc="constantes.map_type" class="mr-5" img-ext="png" img-path="maps/"
+                          label-property="string" title="Maps">
+      </CarouselRandomizer>
 
-          v-for="(map, i) in constantes.map_type"
-          :key="i"
-      >
-        <v-img
-            :aspect-ratio="1"
-            :src="require(`@/assets/maps/${map.id}.png`)"
-            width="100%"
-        >
-          <v-row
-              align="center"
-              class="fill-height"
-              justify="center"
-          >
-            <div class="text-h4">
-              {{ map.string }}
-            </div>
-          </v-row>
-        </v-img>
-
-      </v-carousel-item>
-
-    </CarouselRandomizer>
-
-    <CarouselRandomizer class="flex-grow-1" title="Civilizations">
-      <v-carousel-item
-
-          v-for="(civ, i) in constantes.civ.filter(c => c.id > -1)"
-          :key="i"
-      >
-        <v-img
-            :aspect-ratio="1920/1080"
-            :src="require(`@/assets/flags/${civ.id}.webp`)"
-            height="100%"
-        >
-          <v-row
-              align="center"
-              class="fill-height"
-              justify="center"
-          >
-            <div class="text-h4">
-              {{ civ.string }}
-            </div>
-          </v-row>
-        </v-img>
-      </v-carousel-item>
-
-    </CarouselRandomizer>
+      <CarouselRandomizer :truc="constantes.civ.filter(c => c.id > -1)" img-ext="png" img-path="flags/"
+                          label-property="string" title="Civilizations">
+      </CarouselRandomizer>
+    </div>
 
 
   </v-container>
@@ -83,18 +44,6 @@ export default {
       const max = 3000
       const min = 2000
       return Math.random() * (max - min) + min;
-    },
-    getRandomMap() {
-      this.cycle = true;
-      setTimeout(() => {
-        this.cycle = false;
-      }, this.getRandomTimeout())
-    },
-    getRandomCiv() {
-      this.cycleCiv = true;
-      setTimeout(() => {
-        this.cycleCiv = false;
-      }, this.getRandomTimeout())
     },
   },
   watch: {}
