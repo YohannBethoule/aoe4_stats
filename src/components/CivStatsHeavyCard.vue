@@ -42,7 +42,7 @@
       </v-chip>
       <v-img
           v-if="this.civ.id >= 0"
-          :src="require(`@/assets/flags/${this.civ.id}.webp`)"
+          :src="require(`@/assets/flags/${this.civ.id}.png`)"
           contain max-height="50" max-width="80"></v-img>
 
     </span>

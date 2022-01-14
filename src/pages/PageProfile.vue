@@ -10,7 +10,7 @@
             <v-img v-if="playerLoaded"
                    v-on="on"
                    :alt="'Main civ : ' + getNameCiv(player.mainCiv)"
-                   :src="require(`@/assets/flags/${player.mainCiv}.webp`)" max-height="50" max-width="80"></v-img>
+                   :src="require(`@/assets/flags/${player.mainCiv}.png`)" max-height="50" max-width="80"></v-img>
           </template>
           <span>Main civ : {{ getNameCiv(player.mainCiv) }}</span>
         </v-tooltip>
