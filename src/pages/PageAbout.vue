@@ -3,7 +3,9 @@
     <CustomCard icon="mdi-account-circle-outline" title="About me">
       <p>
         My name is Yohann Bethoule, I'm a web developer from France. I'm also an Aoe 4 player and I made this website to
-        be able to see more game statistics.
+        be able to see more game statistics. <br/>
+        If I've played enough these times, you can find my profile over there :
+        <my-link text="L'homme vert" to="/profile/7595163"></my-link>
       </p>
     </CustomCard>
     <CustomCard icon="mdi-at" title="Contact">
@@ -61,10 +63,11 @@
 
 <script>
 import CustomCard from "@/components/CustomCard";
+import MyLink from "@/components/MyLink";
 
 export default {
   name: "About",
-  components: {CustomCard},
+  components: {CustomCard, MyLink},
 }
 </script>
 
