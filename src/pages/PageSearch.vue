@@ -58,12 +58,12 @@ export default {
     searchId() {
       this.$store.dispatch('leaderboards/searchLeaderboard', this.name)
     },
-    refreshData() {
-      this.leaderboards = new Map(this.leaderboards)
-      if (this.selectedPlayer){
-        this.selectedPlayer = this.leaderboards.get(this.selectedPlayer.profile_id)
-      }
-    }
+    // refreshData() {
+    //   this.leaderboards = new Map(this.leaderboards)
+    //   if (this.selectedPlayer){
+    //     this.selectedPlayer = this.leaderboards.get(this.selectedPlayer.profile_id)
+    //   }
+    // }
   },
   watch : {
     selectedPlayer(value) {

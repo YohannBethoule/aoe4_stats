@@ -4,7 +4,7 @@
       <p>
         My name is Yohann Bethoule, I'm a web developer from France. I'm also an Aoe 4 player and I made this website to
         be able to see more game statistics. <br/>
-        If I've played enough these times, you can find my profile over there :
+        If I've played enough recently, you can find my profile over there :
         <my-link text="L'homme vert" to="/profile/7595163"></my-link>
       </p>
     </CustomCard>
@@ -23,6 +23,10 @@
       </p>
       <p>
         This was made using the API from <a href="https://aoeiv.net/#api" target="_blank">aeoiv.net</a>
+      </p>
+      <p>
+        Aoe4Analytics.com was created under Microsoft's "Game Content Usage Rules" using assets from Age of Empires IV,
+        and it is not endorsed by or affiliated with Microsoft.
       </p>
     </CustomCard>
     <CustomCard icon="mdi-open-in-new" title="External links">
@@ -51,6 +55,17 @@
                 <a href="https://docs.google.com/spreadsheets/d/1LG0We2pTFZsbFm_k1SKLix8gxSq_9n5R_Ic3G2tVzBg/edit?pli=1#gid=1819454633"
                    target="_blank">Acces to google spreasheet</a> -
                 All useful ressources for AoE4 stored in one place
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item class="pa-0">
+            <v-list-item-content>
+              <v-list-item-title class="text-body-1 text--primary">AoE4 Matchup</v-list-item-title>
+              <v-list-item-subtitle class="text-body-1 text--primary wrap-text">
+                <a href="https://aoe4matchup.com"
+                   target="_blank">https://aoe4matchup.com</a> -
+                Input two players and see how they match up
               </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>

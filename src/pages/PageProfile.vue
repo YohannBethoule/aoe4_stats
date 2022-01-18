@@ -4,6 +4,16 @@
     <div v-if="playerLoaded">
 
       <div class="text-h3 d-flex mb-10 flex-wrap">
+        <v-btn
+            class="ma-2"
+            color="indigo"
+            fab
+            outlined
+            small
+            @click="$router.back()"
+        >
+          <v-icon>mdi-arrow-left</v-icon>
+        </v-btn>
         <span class="mr-5">{{ player.leaderboards['-1'].name }}</span>
         <v-tooltip right>
           <template v-slot:activator="{ on }">

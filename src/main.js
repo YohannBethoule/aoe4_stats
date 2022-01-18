@@ -4,7 +4,7 @@ import App from './App.vue'
 import VueRouter from "vue-router";
 import './styles/app.css';
 import vuetify from './plugins/vuetify'
-import Home from "@/pages/Home";
+import PageSearch from "@/pages/PageSearch";
 import PageLeaderboards from "@/pages/PageLeaderboards";
 import store from './store'
 import About from "@/pages/PageAbout";
@@ -28,7 +28,7 @@ Vue.use(Vuex)
 // `Vue.extend()`, or just a component options object.
 // We'll talk about nested routes later.
 const routes = [
-    {path: '', component: Home},
+    {path: '', component: PageSearch},
     {path: '/profile/:profile_id', component: Profile, props: true},
     {path: '/leaderboards', component: PageLeaderboards},
     {path: '/about', component: About},
