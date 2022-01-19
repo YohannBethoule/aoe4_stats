@@ -7,7 +7,7 @@ export default {
     getLeaderboard(leaderboard_id, count, callback, error) {
         axios
             .get('https://aoeiv.net/api/leaderboard?game=aoe4&leaderboard_id=' + leaderboard_id + '&start=0&count=' + count)
-            .then(response => callback(response))
+            .then(response => callback(response.data.leaderboard))
             .catch(err => error(err));
     },
     async searchLeaderboard(leaderboard_id, name) {
@@ -35,5 +35,10 @@ export default {
         axios
             .get('https://aoeiv.net/api/strings?game=aoe4&language=' + language)
             .then(response => callback(response));
+    },
+    getSteamImage(steam_id, callback) {
+        axios
+            .get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + process.env.VUE_APP_STEAM_API_KEY + '&steamids=' + steam_id)
+            .then(response => console.log(response, callback));
     }
 }

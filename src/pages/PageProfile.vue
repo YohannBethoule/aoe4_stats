@@ -14,6 +14,8 @@
         >
           <v-icon>mdi-arrow-left</v-icon>
         </v-btn>
+        <v-img v-if="playerLoaded && player.avatarUrl"
+               max-height="64" max-width="64" src="player.avatarUrl"></v-img>
         <span class="mr-5">{{ player.leaderboards['-1'].name }}</span>
         <v-tooltip right>
           <template v-slot:activator="{ on }">
@@ -31,7 +33,7 @@
             class="ml-auto"
             dark
             rounded
-            @click="refreshPlayerData(player.profile_id)"
+            @click="refreshPlayerData(player.profile_id, player.steam_id)"
         >
           <v-icon>mdi-repeat-variant</v-icon>
           Refresh data

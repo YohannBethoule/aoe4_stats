@@ -44,7 +44,7 @@ export default {
   components: {MyLink},
   props: {
     player: Object,
-    fromPlayerId: Number,
+    fromPlayerId: String,
     isAlly: Boolean
   },
   methods: {}
