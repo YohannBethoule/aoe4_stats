@@ -16,7 +16,6 @@ export default {
   beforeMount() {
   },
   data: function () {
-    console.log(this.ratingHistory.map(change => new Date(change.timestamp * 1000).toISOString().slice(0, 10)))
     return {
       labels: this.ratingHistory.map(change => new Date(change.timestamp * 1000).toISOString().slice(0, 10)),
 

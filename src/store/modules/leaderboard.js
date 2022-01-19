@@ -18,7 +18,8 @@ const actions = {
     getLeaderboard({commit}, {leaderboard_id, count}) {
         api.getLeaderboard(leaderboard_id, count,
             leaderboard => {
-                commit('setLeaderboard', {leaderboard_id, 'leaderboard': leaderboard.data.leaderboard})
+                console.log(leaderboard)
+                commit('setLeaderboard', {leaderboard_id, 'leaderboard': leaderboard})
                 commit('setApiError', false)
             },
             error => {
