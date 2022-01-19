@@ -57,7 +57,7 @@
       </div>
       <div class="d-flex flex-row flex-wrap">
         <MatchHistoryPlayerCard v-for="friend in friends" :key="friend.profile_id" :is-ally="true"
-                                :player="friend"></MatchHistoryPlayerCard>
+                                :from-player-id="profile_id" :player="friend"></MatchHistoryPlayerCard>
       </div>
     </div>
     <div v-if="Object.entries(rivals).length > 0" class="mb-10">
@@ -71,7 +71,7 @@
       </div>
       <div class="d-flex flex-row flex-wrap">
         <MatchHistoryPlayerCard v-for="rival in rivals" :key="rival.profile_id" :is-ally="false"
-                                :player="rival"></MatchHistoryPlayerCard>
+                                :from-player-id="profile_id" :player="rival"></MatchHistoryPlayerCard>
       </div>
     </div>
     <MatchHistory :games="games()" :profile_id="profile_id"></MatchHistory>

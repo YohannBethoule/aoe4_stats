@@ -1,5 +1,5 @@
 <template>
-  <v-container class="d-flex flex-column  justify-space-around">
+  <div class="d-flex flex-column  justify-space-around page-container">
 
     <LoadingPage v-if="!constantes"></LoadingPage>
     <p class="text-h5">Quickly setup random maps and civilizations for your Age of Empire 4 custom games, with the
@@ -15,7 +15,7 @@
     </div>
 
 
-  </v-container>
+  </div>
 </template>
 
 <script>

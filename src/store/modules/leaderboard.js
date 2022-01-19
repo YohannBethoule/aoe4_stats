@@ -9,19 +9,29 @@ const state = () => ({
     18: [],
     19: [],
     20: [],
-    searching: false
+    searching: false,
+    apiError: false
 })
 
 // actions
 const actions = {
     getLeaderboard({commit}, {leaderboard_id, count}) {
-        api.getLeaderboard(leaderboard_id, count, leaderboard => {
-            commit('setLeaderboard', {leaderboard_id, 'leaderboard': leaderboard.data.leaderboard})
-        })
+        api.getLeaderboard(leaderboard_id, count,
+            leaderboard => {
+                commit('setLeaderboard', {leaderboard_id, 'leaderboard': leaderboard.data.leaderboard})
+                commit('setApiError', false)
+            },
+            error => {
+                if (error.request && !error.response) {
+                    commit('setApiError', true)
+                }
+            }
+        )
     },
     searchLeaderboard({commit}, name) {
         //start by deleting the searching leaderboard
         commit('setSearching', true)
+        commit('setApiError', false)
         commit('setLeaderboard', {leaderboard_id, 'leaderboard': null})
         let requests = [];
         let leaderboard_id = '-1'
@@ -32,6 +42,10 @@ const actions = {
         })
         Promise.allSettled(requests).then((results) => {
             results.forEach((result) => {
+                if (result.status === 'rejected') {
+                    commit('setApiError', true)
+                    return;
+                }
                 result.value.data.leaderboard.forEach((player) => {
                     let row = leaderboard.find(p => p.profile_id === player.profile_id)
                     if (row) {
@@ -60,6 +74,9 @@ const mutations = {
     },
     setSearching(state, value) {
         state.searching = value;
+    },
+    setApiError(state, value) {
+        state.apiError = value;
     },
 }
 

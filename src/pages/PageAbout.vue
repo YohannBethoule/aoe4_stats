@@ -1,11 +1,11 @@
 <template>
-  <div class="container mx-auto px-4 sm:px-8">
+  <div>
     <CustomCard icon="mdi-account-circle-outline" title="About me">
       <p>
         My name is Yohann Bethoule, I'm a web developer from France. I'm also an Aoe 4 player and I made this website to
         be able to see more game statistics. <br/>
         If I've played enough recently, you can find my profile over there :
-        <my-link text="L'homme vert" to="/profile/7595163"></my-link>
+        <my-link to="/profile/7595163">L'homme vert</my-link>
       </p>
     </CustomCard>
     <CustomCard icon="mdi-at" title="Contact">

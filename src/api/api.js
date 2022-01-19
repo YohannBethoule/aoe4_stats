@@ -4,10 +4,11 @@
 import axios from "axios";
 
 export default {
-    getLeaderboard(leaderboard_id, count, callback) {
+    getLeaderboard(leaderboard_id, count, callback, error) {
         axios
             .get('https://aoeiv.net/api/leaderboard?game=aoe4&leaderboard_id=' + leaderboard_id + '&start=0&count=' + count)
-            .then(response => callback(response));
+            .then(response => callback(response))
+            .catch(err => error(err));
     },
     async searchLeaderboard(leaderboard_id, name) {
         return axios

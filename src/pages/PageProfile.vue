@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div>
     <LoadingPage v-if="!playerLoaded"></LoadingPage>
     <div v-if="playerLoaded">
 
@@ -53,7 +53,7 @@
       <CivStatsHeavyCard
           :profile_id="profile_id"></CivStatsHeavyCard>
     </div>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -105,6 +105,5 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style>
 </style>

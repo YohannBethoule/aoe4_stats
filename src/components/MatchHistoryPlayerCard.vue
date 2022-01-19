@@ -9,7 +9,7 @@
     >
 
       <div>
-        <my-link :text="player.name" :to="'/profile/'+player.profile_id" classes="text-lg-h6"></my-link>
+        <my-link :to="'/profile/'+player.profile_id" classes="text-lg-h6">{{ player.name }}</my-link>
       </div>
 
       <div v-if="player.nbGames && isAlly">
@@ -21,6 +21,16 @@
 
       <div>
         Elo : {{ player.rating ? player.rating : 'Unknown' }}
+      </div>
+
+      <div class="text-right">
+        <a
+            :href="'https://aoe4matchup.com/?player='+ fromPlayerId +'&player=' + player.profile_id"
+            class="text--primary text-right"
+            target="_blank" title="Go to aoe4matchup.com">
+          See matchup analysis
+          <v-icon>mdi-open-in-new</v-icon>
+        </a>
       </div>
     </v-card>
 
@@ -34,12 +44,13 @@ export default {
   components: {MyLink},
   props: {
     player: Object,
+    fromPlayerId: Number,
     isAlly: Boolean
   },
   methods: {}
 }
 </script>
 
-<style scoped>
+<style>
 
 </style>
