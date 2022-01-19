@@ -2,9 +2,13 @@
   <v-app>
     <AppBar></AppBar>
 
-    <v-main :style="{background: $vuetify.theme.themes['dark'].mainBackground}" class="align-center">
-      <v-container class="py-10" fluid>
-        <!--        class="tw-flex tw-p-10 md:tw-p-32 tw-items-center tw-place-content-center "-->
+    <v-main :style="{background: $vuetify.theme.themes['dark'].mainBackground}">
+      <v-banner v-if="apiError" color="red t-0" sticky>
+        <v-icon>mdi-alert-outline</v-icon>
+        Oops ! It seems like the API from aoeiv.net is not reachable ! No data available
+      </v-banner>
+
+      <v-container class="d-flex pa-10 align-center justify-center page-container my-auto">
         <router-view v-if="constantes" :key="$route.fullPath"></router-view>
         <LoadingPage v-if="!constantes"></LoadingPage>
       </v-container>
@@ -27,7 +31,8 @@ export default {
     LoadingPage
   },
   computed: mapState({
-    constantes: state => state.constantes.all
+    constantes: state => state.constantes.all,
+    apiError: state => state.leaderboards.apiError
   }),
   beforeMount() {
     Vue.prototype.$leaderboards = [17, 18, 19, 20]
@@ -50,5 +55,15 @@ export default {
 <style>
 .table-background {
   background-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+.page-container > div {
+  flex-basis: 100%;
+}
+
+.v-main__wrap {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
 }
 </style>

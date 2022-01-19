@@ -1,5 +1,5 @@
 <template>
-  <v-container class="align-center">
+  <div>
     <div class="d-flex flex-column flex-sm-row justify-center">
       <v-text-field
           label="Search player name..."
@@ -29,7 +29,7 @@
 
     <LoadingPage v-if="leaderboards.searching"></LoadingPage>
 
-  </v-container>
+  </div>
 </template>
 
 <script>
