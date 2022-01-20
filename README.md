@@ -1,3 +1,4 @@
+
 # AoE IV Analytics
 
 https://www.aoe4analytics.com/
@@ -14,13 +15,15 @@ Analytics tool for the RTS game Age of Empire 4.
 
 **Server:** Express, for deployment on Heroku only
 
+## Roadmap
+
+- Waiting for an official API to be made for more analytics
+
+- Design and UX improvements
+
+- Make a gallery to give easy access to the image assets I'm using
+
 ## Feedback
 
 If you have any feedback, please reach out to us at aoe4.analytics@gmail.com
-
-## Roadmap
-
-- Additional browser support
-
-- Add more integrations
 

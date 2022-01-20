@@ -22,21 +22,13 @@ const actions = {
             commit('setGameHistory', {profile_id, gameHistory})
         })
     },
-    getAvatar({commit}, {profile_id, steam_id}) {
-        api.getSteamImage(steam_id, avatarUrl => {
-            commit('setAvatar', {profile_id, avatarUrl})
-        })
-    },
     getRatingHistory({commit}, {leaderboard_id, profile_id}) {
         api.getRatingHistory(leaderboard_id, profile_id, ratingHistory => {
             commit('setRatingHistory', {profile_id, leaderboard_id, ratingHistory})
         })
     },
-    getPlayerLeaderboard({commit, dispatch}, {leaderboard_id, profile_id}) {
+    getPlayerLeaderboard({commit}, {leaderboard_id, profile_id}) {
         api.getPlayerLeaderboard(leaderboard_id, profile_id, leaderboard => {
-            if (leaderboard.data.leaderboard[0] && !store.state.players.all[profile_id]?.avatarUrl) {
-                dispatch('getAvatar', {profile_id: profile_id, steam_id: leaderboard.data.leaderboard[0].steam_id})
-            }
             commit('setPlayerLeaderboard', {profile_id, leaderboard_id, leaderboard})
         })
     },
@@ -80,13 +72,6 @@ const mutations = {
             Vue.set(state.all[profile_id], 'gameHistory', gameHistory)
         } else {
             Vue.set(state.all, profile_id, {gameHistory: gameHistory})
-        }
-    },
-    setAvatar(state, {profile_id, avatarUrl}) {
-        if (state.all[profile_id]) {
-            Vue.set(state.all[profile_id], 'avatarUrl', avatarUrl)
-        } else {
-            Vue.set(state.all, profile_id, {avatarUrl: avatarUrl})
         }
     },
     setRatingHistory(state, {profile_id, leaderboard_id, ratingHistory}) {
