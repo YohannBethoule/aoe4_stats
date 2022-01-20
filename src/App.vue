@@ -46,7 +46,6 @@ export default {
     };
   },
   created() {
-    console.log('steam api = ' + process.env.VUE_APP_STEAM_API_KEY)
     this.$store.dispatch('constantes/getAllConstantes');
   },
   methods: {}
