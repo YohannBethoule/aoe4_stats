@@ -78,7 +78,7 @@
 
 <script>
 import CustomCard from "@/components/CustomCard";
-import MyLink from "@/components/MyLink";
+import MyLink from "@/components/AppLink";
 
 export default {
   name: "About",

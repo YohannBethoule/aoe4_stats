@@ -66,4 +66,13 @@ export default {
   flex-direction: column;
   align-content: center;
 }
+
+.v-menu__content > .theme--dark.v-list {
+  background-color: #3b1a52;
+}
+
+.v-text-field--outlined > .v-input__control > .v-input__slot {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 </style>

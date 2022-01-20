@@ -4,16 +4,15 @@
     <div v-if="playerLoaded">
 
       <div class="text-h3 d-flex mb-10 flex-wrap">
-        <v-btn
+        <AppButton
             class="ma-2"
-            color="indigo"
-            fab
+            :fab="true"
             outlined
-            small
-            @click="$router.back()"
+            :onClick="goBack"
+            :small="true"
         >
           <v-icon>mdi-arrow-left</v-icon>
-        </v-btn>
+        </AppButton>
         <span class="mr-5">{{ player.leaderboards['-1'].name }}</span>
         <v-tooltip right>
           <template v-slot:activator="{ on }">
@@ -27,15 +26,13 @@
 
         <v-skeleton-loader v-if="!playerLoaded" height="50" type="image" width="80"></v-skeleton-loader>
 
-        <v-btn
+        <AppButton
             class="ml-auto"
-            dark
-            rounded
-            @click="refreshPlayerData(player.profile_id)"
+            :onClick="refreshPlayerData"
         >
           <v-icon>mdi-repeat-variant</v-icon>
           Refresh data
-        </v-btn>
+        </AppButton>
       </div>
 
       <v-container grid-list-lg>
@@ -61,10 +58,12 @@ import {mapGetters, mapState} from "vuex";
 import LoadingPage from "@/components/LoadingPage";
 import GameMode from "@/components/GameMode";
 import CivStatsHeavyCard from "@/components/CivStatsHeavyCard";
+import AppButton from "@/components/AppButton";
 
 export default {
   name: "Profile",
   components: {
+    AppButton,
     LoadingPage,
     GameMode,
     CivStatsHeavyCard
@@ -100,6 +99,9 @@ export default {
   methods: {
     refreshPlayerData() {
       this.$store.dispatch('players/refreshPlayerData', this.profile_id);
+    },
+    goBack() {
+      this.$router.back();
     }
   }
 }

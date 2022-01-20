@@ -9,7 +9,7 @@
     >
 
       <div>
-        <my-link :to="'/profile/'+player.profile_id" classes="text-lg-h6">{{ player.name }}</my-link>
+        <app-link :to="'/profile/'+player.profile_id" classes="text-lg-h6">{{ player.name }}</app-link>
       </div>
 
       <div v-if="player.nbGames && isAlly">
@@ -37,11 +37,11 @@
 </template>
 
 <script>
-import MyLink from "@/components/MyLink";
+import AppLink from "@/components/AppLink";
 
 export default {
   name: "MatchHistoryPlayerCard",
-  components: {MyLink},
+  components: {AppLink},
   props: {
     player: Object,
     fromPlayerId: String,

@@ -9,14 +9,14 @@
           light
           class="flex-grow-0"
       ></v-text-field>
-      <v-btn
-          @click="searchId"
-          class="tw-mx-5 tw-mt-1 tw-my-auto"
+      <AppButton
+          :onClick="searchId"
+          class="mx-5 mt-1 my-auto"
           outlined
           color="rgba(255, 255, 255, 0.8)"
       >
         Search
-      </v-btn>
+      </AppButton>
     </div>
 
 
@@ -36,11 +36,13 @@
 import LeaderBoardTable from "@/components/LeaderboardTable";
 import {mapState} from "vuex";
 import LoadingPage from "@/components/LoadingPage";
+import AppButton from "@/components/AppButton";
 
 
 export default {
   name: 'HelloWorld',
   components: {
+    AppButton,
     LoadingPage,
     LeaderBoardTable,
   },
