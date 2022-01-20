@@ -1,24 +1,26 @@
-# aoe4_stats
+# AoE IV Analytics
 
-## Project setup
-```
-npm install
-```
+https://www.aoe4analytics.com/
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Analytics tool for the RTS game Age of Empire 4.
 
-### Compiles and minifies for production
-```
-npm run build
-```
+![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)
 
-### Lints and fixes files
-```
-npm run lint
-```
+![GitHub repo size](https://img.shields.io/github/repo-size/YohannBethoule/aoe4_stats?style=plastic)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Tech Stack
+
+**Client:** Vue 2 with Vuetify
+
+**Server:** Express, for deployment on Heroku only
+
+## Feedback
+
+If you have any feedback, please reach out to us at aoe4.analytics@gmail.com
+
+## Roadmap
+
+- Additional browser support
+
+- Add more integrations
+
