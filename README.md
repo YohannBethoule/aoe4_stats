@@ -25,5 +25,5 @@ Analytics tool for the RTS game Age of Empire 4.
 
 ## Feedback
 
-If you have any feedback, please reach out to us at aoe4.analytics@gmail.com
+If you have any feedback, please reach out to me at aoe4.analytics@gmail.com
 

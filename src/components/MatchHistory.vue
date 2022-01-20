@@ -55,6 +55,7 @@
                   v-for="ally in item.players.filter(p1 => p1.team === item.players.find(p2 => p2.profile_id == profile_id).team)"
                   :key="ally.profile_id">
                 <MatchHistoryPlayerCard :from-player-id="profile_id" :is-ally="true"
+                                        :leaderboard_id="item.leaderboard_id"
                                         :player="ally"></MatchHistoryPlayerCard>
               </div>
             </div>
@@ -66,6 +67,7 @@
                   v-for="ennemy in item.players.filter(p1 => p1.team !== item.players.find(p2 => p2.profile_id == profile_id).team)"
                   :key="ennemy.profile_id">
                 <MatchHistoryPlayerCard :from-player-id="profile_id" :is-ally="false"
+                                        :leaderboard_id="item.leaderboard_id"
                                         :player="ennemy"></MatchHistoryPlayerCard>
               </div>
             </div>
