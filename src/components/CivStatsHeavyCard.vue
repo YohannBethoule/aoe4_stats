@@ -6,9 +6,11 @@
       <v-btn-toggle
           v-model="gameMode_id"
           class="mr-10 d-none d-md-flex flex-row"
+          background-color="rgba(0,0,0,0)"
           mandatory
       >
-        <v-btn v-for="mode in constantes.leaderboards" :key="mode.id" :value="mode.id" type="button">
+        <v-btn v-for="mode in constantes.leaderboards" :key="mode.id" :value="mode.id" color="rgba(255,255,255,0.1)"
+               type="button">
           {{ mode.label }} ({{ getGameCountByMode(mode.id) }})
         </v-btn>
       </v-btn-toggle>
@@ -19,7 +21,8 @@
           class="pt-7 d-flex d-md-none"
           item-value="id"
           label="Select game mode"
-          solo
+          :menu-props="{ bottom: true, offsetY: true}"
+          outlined
       ></v-select>
       <v-select
           v-model="civ_id"
@@ -28,7 +31,8 @@
           class="pt-7"
           item-value="id"
           label="Select civilization"
-          solo
+          :menu-props="{ bottom: true, offsetY: true}"
+          outlined
       ></v-select>
     </div>
 

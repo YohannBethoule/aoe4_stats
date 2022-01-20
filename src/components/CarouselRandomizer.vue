@@ -31,13 +31,12 @@
 
     </v-carousel>
     <div class="d-flex flex-column justify-center mt-5">
-      <v-btn class="tw-mx-auto" @click="randomCycle()">Get random</v-btn>
+      <AppButton :onClick="randomCycle" class="mx-auto">Get random</AppButton>
       <div class="text-h6 my-3">Veto</div>
       <v-select
           v-model="vetos"
           :item-text="labelProperty"
           :items="truc"
-          attach
           chips
           class=""
           item-value="id"
@@ -52,10 +51,12 @@
 <script>
 import {mapState} from "vuex";
 import CustomCard from '@/components/CustomCard'
+import AppButton from "@/components/AppButton";
 
 export default {
   name: "CarouselRandomizer",
   components: {
+    AppButton,
     CustomCard
   },
   props: {

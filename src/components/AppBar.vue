@@ -6,7 +6,7 @@
         hide-on-scroll
     >
       <v-app-bar-nav-icon class="d-flex d-sm-none" left @click="drawer = true"></v-app-bar-nav-icon>
-      <my-link classes="text-h5 text-no-wrap" to="/">AoE IV Analytics</my-link>
+      <app-link classes="text-h5 text-no-wrap" to="/">AoE IV Analytics</app-link>
       <v-icon class="ml-2 d-none d-sm-inline-flex">mdi-chart-areaspline</v-icon>
       <v-tabs centered class="d-none d-sm-inline-flex justify-center text-white" color="white">
         <v-tab text to="/">Search</v-tab>
@@ -21,7 +21,8 @@
           class="d-none d-md-flex"
           hide-details
           label="Search player name..."
-          light
+          background-color="rgba(255,255,255,0.2)"
+          color="white"
           solo
           v-on:keyup.enter="searchId"
       ></v-text-field>
@@ -68,11 +69,11 @@
 </template>
 
 <script>
-import MyLink from "@/components/MyLink";
+import AppLink from "@/components/AppLink";
 
 export default {
   name: "AppBar",
-  components: {MyLink},
+  components: {AppLink},
   data() {
     return {
       drawer: false,
