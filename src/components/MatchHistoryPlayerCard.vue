@@ -25,7 +25,7 @@
 
       <div class="text-right">
         <a
-            :href="'https://aoe4matchup.com/?player='+ fromPlayerId +'&player=' + player.profile_id"
+            :href="matchupLink"
             class="text--primary text-right"
             target="_blank" title="Go to aoe4matchup.com">
           See matchup analysis
@@ -45,9 +45,19 @@ export default {
   props: {
     player: Object,
     fromPlayerId: String,
-    isAlly: Boolean
+    isAlly: Boolean,
+    leaderboard_id: Number
   },
-  methods: {}
+  methods: {},
+  computed: {
+    matchupLink() {
+      let leaderboard_id = this.leaderboard_id;
+      if (leaderboard_id === 0) {
+        leaderboard_id = 17;
+      }
+      return 'https://aoe4matchup.com/?player=' + this.fromPlayerId + '&player=' + this.player.profile_id + '&ladderId=' + leaderboard_id
+    }
+  }
 }
 </script>
 

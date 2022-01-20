@@ -57,7 +57,8 @@
       </div>
       <div class="d-flex flex-row flex-wrap">
         <MatchHistoryPlayerCard v-for="friend in friends" :key="friend.profile_id" :is-ally="true"
-                                :from-player-id="profile_id" :player="friend"></MatchHistoryPlayerCard>
+                                :from-player-id="profile_id" :leaderboard_id="friend.leaderboard_id"
+                                :player="friend"></MatchHistoryPlayerCard>
       </div>
     </div>
     <div v-if="Object.entries(rivals).length > 0" class="mb-10">
@@ -71,7 +72,8 @@
       </div>
       <div class="d-flex flex-row flex-wrap">
         <MatchHistoryPlayerCard v-for="rival in rivals" :key="rival.profile_id" :is-ally="false"
-                                :from-player-id="profile_id" :player="rival"></MatchHistoryPlayerCard>
+                                :from-player-id="profile_id" :leaderboard_id="rival.leaderboard_id"
+                                :player="rival"></MatchHistoryPlayerCard>
       </div>
     </div>
     <MatchHistory :games="games()" :profile_id="profile_id"></MatchHistory>
@@ -129,8 +131,7 @@ export default {
           if (allys[player.profile_id]) {
             allys[player.profile_id].nbGames++;
           } else {
-            allys[player.profile_id] = {...player};
-            allys[player.profile_id].nbGames = 1;
+            allys[player.profile_id] = {...player, leaderboard_id: game.leaderboard_id, nbGames: 1};
           }
         }
       }
@@ -149,8 +150,7 @@ export default {
           if (ennemys[player.profile_id]) {
             ennemys[player.profile_id].nbGames++;
           } else {
-            ennemys[player.profile_id] = {...player};
-            ennemys[player.profile_id].nbGames = 1;
+            ennemys[player.profile_id] = {...player, leaderboard_id: game.leaderboard_id, nbGames: 1};
           }
         }
       }
