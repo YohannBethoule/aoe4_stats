@@ -125,7 +125,6 @@ export default {
       if (this.gameMode.nbPlayers == 1) return [];
       let allys = {};
       for (let game of this.games()) {
-        console.log("friends", game)
         const team_id = game.players.find(p => p.profile_id == this.profile_id).team;
 
         for (let player of game.players.filter(p => p.team === team_id && p.profile_id != this.profile_id)) {
