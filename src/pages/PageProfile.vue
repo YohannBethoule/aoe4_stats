@@ -3,7 +3,7 @@
     <LoadingPage v-if="!playerLoaded"></LoadingPage>
     <div v-if="playerLoaded">
 
-      <div class="text-h3 d-flex mb-10 flex-wrap">
+      <div class="text-h4 text-md-h3 d-flex mb-10 flex-wrap profile-header">
         <AppButton
             class="ma-2"
             :fab="true"
@@ -13,21 +13,30 @@
         >
           <v-icon>mdi-arrow-left</v-icon>
         </AppButton>
+        <AppButton
+            :onClick="refreshPlayerData"
+            class="d-flex d-sm-none ma-2 ml-auto"
+        >
+          <v-icon>mdi-repeat-variant</v-icon>
+          Refresh data
+        </AppButton>
         <span class="mr-5">{{ player.leaderboards['-1'].name }}</span>
         <v-tooltip right>
           <template v-slot:activator="{ on }">
             <v-img v-if="playerLoaded"
                    v-on="on"
                    :alt="'Main civ : ' + getNameCiv(player.mainCiv)"
-                   :src="require(`@/assets/flags/${player.mainCiv}.png`)" max-height="50" max-width="80"></v-img>
+                   :src="require(`@/assets/flags/${player.mainCiv}.png`)" class="mt-md-1" max-height="40"
+                   max-width="70"></v-img>
           </template>
           <span>Main civ : {{ getNameCiv(player.mainCiv) }}</span>
         </v-tooltip>
 
         <v-skeleton-loader v-if="!playerLoaded" height="50" type="image" width="80"></v-skeleton-loader>
 
+
         <AppButton
-            class="ml-auto"
+            class="ml-auto d-none d-sm-block"
             :onClick="refreshPlayerData"
         >
           <v-icon>mdi-repeat-variant</v-icon>
@@ -107,5 +116,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.profile-header > * {
+  margin-bottom: 2rem;
+}
 </style>

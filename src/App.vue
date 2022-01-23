@@ -8,7 +8,7 @@
         Oops ! It seems like the API from aoeiv.net is not reachable ! No data available
       </v-banner>
 
-      <v-container class="d-flex pa-10 align-center justify-center page-container my-auto">
+      <v-container class="pa-5 pa-md-10 align-center justify-center page-container my-auto">
         <router-view v-if="constantes" :key="$route.fullPath"></router-view>
         <LoadingPage v-if="!constantes"></LoadingPage>
       </v-container>
