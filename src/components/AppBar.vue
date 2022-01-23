@@ -31,7 +31,8 @@
     <v-navigation-drawer
         v-model="drawer"
         color="rgba(0, 0, 0, 0.9)"
-        absolute
+        fixed
+        sticky
         left
         temporary
     >
