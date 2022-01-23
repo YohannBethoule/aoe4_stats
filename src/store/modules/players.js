@@ -27,17 +27,40 @@ const actions = {
             commit('setRatingHistory', {profile_id, leaderboard_id, ratingHistory})
         })
     },
-    getPlayerLeaderboard({commit}, {leaderboard_id, profile_id}) {
-        api.getPlayerLeaderboard(leaderboard_id, profile_id, leaderboard => {
-            commit('setPlayerLeaderboard', {profile_id, leaderboard_id, leaderboard})
+    getPlayerLeaderboards({commit}, profile_id) {
+        let requests = [];
+        commit('setSearching', {profile_id, value: true})
+        store.state.constantes.all.leaderboards.forEach(mode => {
+            if (mode.id == -1) return;
+            requests.push(api.getPlayerLeaderboard(mode.id, profile_id))
+        })
+        Promise.allSettled(requests).then((results) => {
+            results.forEach((result) => {
+                let data = result.value.data;
+                if (result.status === 'rejected' || data.count < 1) {
+                    return;
+                }
+                commit('setPlayerLeaderboard', {
+                    profile_id,
+                    leaderboard_id: data.leaderboard_id,
+                    leaderboard: data.leaderboard[0]
+                })
+
+            })
+            commit('setSearching', {profile_id, value: false})
+        })
+    },
+    getSteamAvatar({commit}, profile_id) {
+        api.getSteamAvatar(profile_id, avatarUrl => {
+            commit('setAvatarUrl', {profile_id, avatarUrl})
         })
     },
     refreshPlayerData({dispatch}, profile_id) {
         dispatch('getGameHistory', profile_id)
-
+        //dispatch('getSteamAvatar', profile_id)
+        dispatch('getPlayerLeaderboards', profile_id)
         store.state.constantes.all.leaderboards.forEach(mode => {
             if (mode.id == -1) return;
-            dispatch('getPlayerLeaderboard', {leaderboard_id: mode.id, profile_id: profile_id})
             dispatch('getRatingHistory', {'leaderboard_id': mode.id, 'profile_id': profile_id})
         })
     }
@@ -64,6 +87,20 @@ const getters = {
 
 // mutations
 const mutations = {
+    setAvatarUrl(state, {profile_id, avatarUrls}) {
+        if (state.all[profile_id]) {
+            Vue.set(state.all[profile_id], 'avatarUrls', avatarUrls)
+        } else {
+            Vue.set(state.all, profile_id, {avatarUrls: avatarUrls})
+        }
+    },
+    setSearching(state, {profile_id, value}) {
+        if (state.all[profile_id] && !value) {
+            Vue.set(state.all[profile_id], 'searching', value)
+        } else {
+            Vue.set(state.all, profile_id, {searching: value})
+        }
+    },
     setGameHistory(state, {profile_id, gameHistory}) {
         for (let game of gameHistory) {
             game.leaderboard_id = getMatchLeaderboardId(game);
@@ -89,8 +126,8 @@ const mutations = {
         }
     },
     setPlayerLeaderboard(state, {profile_id, leaderboard_id, leaderboard}) {
-        if (!leaderboard.data.leaderboard[0]) return;
-        const element = {...leaderboard.data.leaderboard[0]}
+        if (!leaderboard) return;
+        const element = {...leaderboard}
         if (state.all[profile_id]) {
             if (state.all[profile_id].leaderboards) {
                 const globalLeaderboard = state.all[profile_id].leaderboards['-1'] ?? null;
@@ -111,7 +148,6 @@ const mutations = {
             }
         } else {
             Vue.set(state.all, profile_id, {leaderboards: {[leaderboard_id]: element, '-1': element}})
-            // Vue.set(state.all, profile_id, leaderboard.data.leaderboard[0])
         }
     }
 

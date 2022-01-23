@@ -12,12 +12,11 @@ export default {
     },
     async searchLeaderboard(leaderboard_id, name) {
         return axios
-            .get('https://aoeiv.net/api/leaderboard?game=aoe4&leaderboard_id=' + leaderboard_id + '&start=0&count=1000&search=' + name)
+            .get('https://aoeiv.net/api/leaderboard?game=aoe4&leaderboard_id=' + leaderboard_id + '&start=0&count=1000&search=' + name);
     },
-    getPlayerLeaderboard(leaderboard_id, profile_id, callback) {
-        axios
-            .get('https://aoeiv.net/api/leaderboard?game=aoe4&leaderboard_id=' + leaderboard_id + '&start=0&count=' + 1 + '&profile_id=' + profile_id)
-            .then(response => callback(response));
+    async getPlayerLeaderboard(leaderboard_id, profile_id) {
+        return axios
+            .get('https://aoeiv.net/api/leaderboard?game=aoe4&leaderboard_id=' + leaderboard_id + '&start=0&count=' + 1 + '&profile_id=' + profile_id);
     },
     getGameHistory(profile_id, callback) {
         axios
@@ -36,9 +35,13 @@ export default {
             .get('https://aoeiv.net/api/strings?game=aoe4&language=' + language)
             .then(response => callback(response));
     },
-    getSteamImage(steam_id, callback) {
+    getSteamAvatar(profile_id, callback) {
         axios
-            .get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + process.env.VUE_APP_STEAM_API_KEY + '&steamids=' + steam_id)
+            .post('https://aoe4world.com/api/v0/avatars/', {'profile_ids': [profile_id]}, {
+                headers: {
+                    'content-type': 'application/json'
+                }
+            })
             .then(response => console.log(response, callback));
     }
 }

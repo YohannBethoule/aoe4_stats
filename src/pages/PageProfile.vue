@@ -1,7 +1,12 @@
 <template>
   <div>
-    <LoadingPage v-if="!playerLoaded"></LoadingPage>
-    <div v-if="playerLoaded">
+    <LoadingPage v-if="player.searching"></LoadingPage>
+
+    <div v-if="!player.searching && !playerLoaded"
+         class="flex text-h4 text-center mt-5">No data found...
+    </div>
+
+    <div v-if="playerLoaded && !player.searching">
 
       <div class="text-h4 text-md-h3 d-flex mb-10 flex-wrap profile-header">
         <AppButton
