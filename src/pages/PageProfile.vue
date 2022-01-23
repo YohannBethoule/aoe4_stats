@@ -25,6 +25,9 @@
           <v-icon>mdi-repeat-variant</v-icon>
           Refresh data
         </AppButton>
+        <v-img v-if="player.avatarUrls"
+               :src="player.avatarUrls.medium"
+               alt="Steam avatar" class="mt-md-1 mx-2" max-height="45" max-width="45"></v-img>
         <span class="mr-5">{{ player.leaderboards['-1'].name }}</span>
         <v-tooltip right>
           <template v-slot:activator="{ on }">

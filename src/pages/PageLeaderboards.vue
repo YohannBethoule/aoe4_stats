@@ -64,9 +64,8 @@ export default {
   }),
   methods: {
     searchGameMode() {
-      this.$store.dispatch('leaderboards/getLeaderboard', {leaderboard_id: this.gameMode, count: 10000});
+      this.$store.dispatch('leaderboards/getLeaderboard', {leaderboard_id: this.gameMode, count: 1000});
     },
-
   },
   watch: {
     gameMode: function () {
