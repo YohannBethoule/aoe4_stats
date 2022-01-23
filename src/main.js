@@ -28,7 +28,7 @@ Vue.use(Vuex)
 // `Vue.extend()`, or just a component options object.
 // We'll talk about nested routes later.
 const routes = [
-    {path: '', component: PageSearch},
+    {path: '/', name: 'PageSearch', component: PageSearch},
     {path: '/profile/:profile_id', component: Profile, props: true},
     {path: '/leaderboards', component: PageLeaderboards},
     {path: '/about', component: About},

@@ -56,6 +56,13 @@ export default {
     constantes: state => state.constantes.all,
     leaderboards: state => state.leaderboards,
   }),
+  created() {
+    console.log("PageSearch created", this.$route.params)
+    if (this.$route.params.search) {
+      this.name = this.$route.params.search;
+      this.searchId();
+    }
+  },
   methods: {
     searchId() {
       this.$store.dispatch('leaderboards/searchLeaderboard', this.name)

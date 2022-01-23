@@ -22,6 +22,7 @@
           hide-details
           label="Search player name..."
           background-color="rgba(255,255,255,0.2)"
+          :disabled="this.$route.name === 'PageSearch'"
           color="white"
           solo
           v-on:keyup.enter="searchId"
@@ -85,8 +86,10 @@ export default {
   computed: {},
   methods: {
     searchId() {
-      this.$store.dispatch('leaderboards/searchLeaderboard', this.name)
-      this.$router.push('/');
+      this.$router.push({
+        name: 'PageSearch',
+        params: {search: this.name}
+      });
     },
   }
 }
