@@ -52,7 +52,6 @@ const actions = {
     },
     getSteamAvatar({commit}, profile_id) {
         api.getSteamAvatar([profile_id], avatarUrl => {
-            console.log('getSteam avatar handler', avatarUrl)
             commit('setAvatarUrl', {profile_id, avatarUrl: avatarUrl[profile_id]})
         })
     },

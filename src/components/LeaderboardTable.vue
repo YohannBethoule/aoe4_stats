@@ -16,10 +16,10 @@
     </v-data-table-header>
     <template v-slot:item.name="{ item }">
       <div class="d-flex align-center">
-        <v-img v-if="!leaderboards.avatars[item.profile_id]" :src="require('@/assets/avatar_not_found.png')"
-               class="mr-2" max-height="30" max-width="30"></v-img>
-        <v-img v-if="leaderboards.avatars[item.profile_id]" :src="leaderboards.avatars[item.profile_id].medium"
-               class="mr-2" max-height="30" max-width="30"></v-img>
+        <!--        <v-img v-if="!leaderboards.avatars[item.profile_id]" :src="require('@/assets/avatar_not_found.png')"-->
+        <!--               class="mr-2" max-height="30" max-width="30"></v-img>-->
+        <!--        <v-img v-if="leaderboards.avatars[item.profile_id]" :src="leaderboards.avatars[item.profile_id].medium"-->
+        <!--               class="mr-2" max-height="40" max-width="40"></v-img>-->
         <router-link :to="'/profile/'+item.profile_id"> {{ item.name }}</router-link>
       </div>
     </template>
