@@ -51,13 +51,13 @@ const actions = {
         })
     },
     getSteamAvatar({commit}, profile_id) {
-        api.getSteamAvatar(profile_id, avatarUrl => {
-            commit('setAvatarUrl', {profile_id, avatarUrl})
+        api.getSteamAvatar([profile_id], avatarUrl => {
+            commit('setAvatarUrl', {profile_id, avatarUrl: avatarUrl[profile_id]})
         })
     },
     refreshPlayerData({dispatch}, profile_id) {
         dispatch('getGameHistory', profile_id)
-        //dispatch('getSteamAvatar', profile_id)
+        dispatch('getSteamAvatar', profile_id)
         dispatch('getPlayerLeaderboards', profile_id)
         store.state.constantes.all.leaderboards.forEach(mode => {
             if (mode.id == -1) return;
@@ -87,11 +87,11 @@ const getters = {
 
 // mutations
 const mutations = {
-    setAvatarUrl(state, {profile_id, avatarUrls}) {
+    setAvatarUrl(state, {profile_id, avatarUrl}) {
         if (state.all[profile_id]) {
-            Vue.set(state.all[profile_id], 'avatarUrls', avatarUrls)
+            Vue.set(state.all[profile_id], 'avatarUrls', avatarUrl)
         } else {
-            Vue.set(state.all, profile_id, {avatarUrls: avatarUrls})
+            Vue.set(state.all, profile_id, {avatarUrls: avatarUrl})
         }
     },
     setSearching(state, {profile_id, value}) {

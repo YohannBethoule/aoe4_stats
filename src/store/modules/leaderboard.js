@@ -9,6 +9,7 @@ const state = () => ({
     18: [],
     19: [],
     20: [],
+    // avatars: {},
     searching: false,
     apiError: false
 })
@@ -60,7 +61,7 @@ const actions = {
             commit('setLeaderboard', {leaderboard_id, leaderboard})
             commit('setSearching', false)
         })
-    }
+    },
 }
 
 // getters
@@ -71,6 +72,12 @@ const getters = {}
 const mutations = {
     setLeaderboard(state, {leaderboard_id, leaderboard}) {
         state[leaderboard_id] = leaderboard
+        // if (leaderboard) {
+        //     api.getSteamAvatar(leaderboard.filter(player => !Object.keys(state.avatars).includes(player.profile_id)).map(player => player.profile_id), (response) => {
+        //         console.log('leaderboard getAvatars', response)
+        //         Object.assign(state.avatars, response)
+        //     })
+        // }
     },
     setSearching(state, value) {
         state.searching = value;

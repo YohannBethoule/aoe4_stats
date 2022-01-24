@@ -20,25 +20,29 @@
         </AppButton>
         <AppButton
             :onClick="refreshPlayerData"
-            class="d-flex d-sm-none ma-2 ml-auto"
+            class="d-flex d-sm-none mt-2 ml-auto"
         >
           <v-icon>mdi-repeat-variant</v-icon>
           Refresh data
         </AppButton>
-        <span class="mr-5">{{ player.leaderboards['-1'].name }}</span>
-        <v-tooltip right>
-          <template v-slot:activator="{ on }">
-            <v-img v-if="playerLoaded"
-                   v-on="on"
-                   :alt="'Main civ : ' + getNameCiv(player.mainCiv)"
-                   :src="require(`@/assets/flags/${player.mainCiv}.png`)" class="mt-md-1" max-height="40"
-                   max-width="70"></v-img>
-          </template>
-          <span>Main civ : {{ getNameCiv(player.mainCiv) }}</span>
-        </v-tooltip>
+        <div class="d-flex align-center">
+          <v-img v-if="player.avatarUrls"
+                 :src="player.avatarUrls.medium"
+                 alt="Steam avatar" class="mx-2" max-height="50" max-width="50"></v-img>
+          <span class="mr-5">{{ player.leaderboards['-1'].name }}</span>
+          <v-tooltip right>
+            <template v-slot:activator="{ on }">
+              <v-img v-if="playerLoaded"
+                     v-on="on"
+                     :alt="'Main civ : ' + getNameCiv(player.mainCiv)"
+                     :src="require(`@/assets/flags/${player.mainCiv}.png`)" class="mt-md-1" max-height="40"
+                     max-width="70"></v-img>
+            </template>
+            <span>Main civ : {{ getNameCiv(player.mainCiv) }}</span>
+          </v-tooltip>
+        </div>
 
         <v-skeleton-loader v-if="!playerLoaded" height="50" type="image" width="80"></v-skeleton-loader>
-
 
         <AppButton
             class="ml-auto d-none d-sm-block"

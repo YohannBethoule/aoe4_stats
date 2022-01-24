@@ -35,13 +35,13 @@ export default {
             .get('https://aoeiv.net/api/strings?game=aoe4&language=' + language)
             .then(response => callback(response));
     },
-    getSteamAvatar(profile_id, callback) {
+    getSteamAvatar(profile_ids, callback) {
         axios
-            .post('https://aoe4world.com/api/v0/avatars/', {'profile_ids': [profile_id]}, {
+            .post('https://aoe4world.com/api/v0/avatars/', {'profile_ids': [profile_ids]}, {
                 headers: {
                     'content-type': 'application/json'
                 }
             })
-            .then(response => console.log(response, callback));
+            .then(response => callback(response.data));
     }
 }
